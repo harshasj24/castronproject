@@ -22,4 +22,8 @@ export class ApiService {
   oneuser(email: any) {
     return this.http.get(`http://localhost:4300/labs/oneUserdetails/${email}`);
   }
+
+  updateOneUser(data: any) {
+    return this.http.put('http://localhost:4300/labs/updateuser', data);
+  }
 }

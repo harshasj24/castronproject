@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-usersReportsSchema = new Schema({
+const usersReportsSchema = new Schema({
   sampleId: {
     type: Number,
     required: true,
   },
-  Haematology: [
+  haematology: [
     {
       hemoglobin: {
         type: String,
@@ -88,3 +88,5 @@ usersReportsSchema = new Schema({
     },
   ],
 });
+
+module.exports = mongoose.model("reports", usersReportsSchema);

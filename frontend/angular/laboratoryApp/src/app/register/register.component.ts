@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
 
       if (!this.sataus.error) {
         window.confirm('register addesucess fully');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/userdetails']);
       } else {
         window.alert(this.sataus.message);
       }

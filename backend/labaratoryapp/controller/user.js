@@ -98,24 +98,48 @@ let getOneUser = async (req, res, next) => {
   }
 };
 
-let oneUserDetails = async (req, res, next) => {
+// let oneUserDetails = async (req, res, next) => {
+//   try {
+//     let myemail = req.params.email;
+//     let { fName, email, password } = req.body;
+//     let allData = await usersData.find({ email: myemail }).lean();
+
+//     await usersData.updateOne(
+//       { email: myemail },
+//       {
+//         fName,
+//         email,
+//         password,
+//       }
+//     );
+//     res.json({
+//       error: false,
+//       message: "Data fetched sucessfully",
+//       data: allData,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+let updateUser = async (req, res, next) => {
+  let { fName, email, password } = req.body;
   try {
-    let myemail = req.params.email;
-    let { fName, email, password } = req.body;
-    let allData = await usersData.find({ email: myemail }).lean();
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     await usersData.updateOne(
-      { email: myemail },
+      { email: email },
       {
         fName,
-        email,
-        password,
+        password: hashedPassword,
       }
     );
     res.json({
       error: false,
       message: "Data fetched sucessfully",
-      data: allData,
+      data: null,
     });
   } catch (err) {
     next(err);
@@ -126,6 +150,7 @@ module.exports = {
   signup,
   login,
   allUserDetails,
-  oneUserDetails,
+
   getOneUser,
+  updateUser,
 };

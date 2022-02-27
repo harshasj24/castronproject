@@ -62,7 +62,7 @@
               class="form-control"
               id="exampleInputPassword1"
               formControlName="fName"
-              
+              [(ngModel)]="updatedOne.fName"
             />
           </div>
           <div class="form-group mt-3">
@@ -73,6 +73,8 @@
               aria-describedby="emailHelp"
               placeholder="Enter Email *"
               formControlName="email"
+              [(ngModel)]="updatedOne.email"
+              [disabled]="false"
             />
           </div>
           <div class="form-group mt-4">
@@ -82,32 +84,13 @@
               class="form-control"
               id="exampleInputPassword1"
               formControlName="password"
+              [(ngModel)]="updatedOne.password"
             />
           </div>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="role"
-            placeholder="Role "
-            list="list"
-          />
-          <datalist id="list">
-            <option value="Admin"></option>
-            <option value="user"></option>
-          </datalist>
-          <button
-            [disabled]="regForm?.invalid"
-            type="submit"
-            class="mybtn btn btn-dark btn-sm"
-          >
-            register patient
-          </button>
+          <button type="submit" class="btn btn-secondary">submit</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
         <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>

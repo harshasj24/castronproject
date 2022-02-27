@@ -21,17 +21,30 @@ export class UserdetailsComponent implements OnInit {
 
   newDetails: any;
 
-  updatedOne: any;
-
+  updatedOne: any = [];
   edit(email: any) {
-    this.apiServices.oneuser(email).subscribe;
+    this.apiServices.oneuser(email).subscribe((val) => {
+      this.newDetails = val;
+      console.log(val);
+      this.updatedOne = this.newDetails.data;
+    });
   }
-  regSubmit() {}
+  regSubmit() {
+    console.log(this.regForm.value);
+
+    this.apiServices.updateOneUser(this.regForm.value).subscribe((val) => {
+      console.log(val);
+    });
+  }
   ngOnInit(): void {
     this.apiServices.userDetails().subscribe((val) => {
       console.log(val);
 
       this.userDetails = val;
     });
+    let date = new Date();
+
+    let time = `${date.getHours() - 12} ${date.getMinutes()} `;
+    console.log(time);
   }
 }
