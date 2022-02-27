@@ -73,6 +73,7 @@ form {
   border-radius: 0px !important;
   border: none;
   border-bottom: 1px solid;
+  outline: none;
 }
 
 .fb,

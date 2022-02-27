@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -8,24 +10,24 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  constructor(private authServices: AuthService, private router: Router) {}
   dat: any;
 
   passText: any = 'password';
   eyes: any = 'fa fa-eye-slash';
   formsServersData: any;
   loginForm = new FormGroup({
-    mail: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     check: new FormControl(''),
-    pass: new FormControl('', [
+    password: new FormControl('', [
       Validators.required,
       Validators.pattern('[A-Za-z0-9]+$'),
     ]),
   });
-  get mail() {
+  get email() {
     return this.loginForm.get('mail');
   }
-  get pass() {
+  get password() {
     return this.loginForm.get('pass');
   }
   togglePass() {
@@ -38,19 +40,23 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  msg: any;
+
   umail: any = 'harsha@com';
   upass: any = '123';
 
   send() {
-    if (this.mail?.value === this.umail && this.pass?.value === this.upass) {
-      this.formsServersData = true;
-      // this.serve.getdata(true);
-      console.log(true);
-    } else {
-      this.formsServersData = false;
-      // this.serve.getdata(true);
-      console.log(false);
-    }
+    console.log(this.loginForm.value);
+
+    this.authServices.login(this.loginForm.value).subscribe((val) => {
+      this.msg = val;
+      console.log(this.msg);
+      if (!this.msg.error && this.msg.data.role === 'Admin') {
+        this.router.navigate(['/dashbord']);
+      } else {
+        window.alert('imposter');
+      }
+    });
   }
 
   ngOnInit(): void {

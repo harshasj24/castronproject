@@ -12,6 +12,7 @@ import { HemoglobinComponent } from './hemoglobin/hemoglobin.component';
 import { GlucometryComponent } from './glucometry/glucometry.component';
 import { ThyroidComponent } from './thyroid/thyroid.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
     GlucometryComponent,
     ThyroidComponent,
     LandingpageComponent,
+    UserdetailsComponent,
   ],
   imports: [
     BrowserModule,

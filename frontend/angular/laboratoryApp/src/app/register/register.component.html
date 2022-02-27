@@ -1,11 +1,12 @@
-<form class="mx-auto mt-5">
+<form [formGroup]="regForm" (ngSubmit)="regSubmit()" class="mx-auto mt-5">
   <h4 class="text-center">Please Register!</h4>
   <div class="form-group mt-4">
     <input
       type="text"
-      placeholder="Enter Your Password *"
+      placeholder="Enter Patient name*"
       class="form-control"
       id="exampleInputPassword1"
+      formControlName="fName"
     />
   </div>
   <div class="form-group mt-3">
@@ -14,7 +15,8 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="Enter your Email *"
+      placeholder="Enter Email *"
+      formControlName="email"
     />
   </div>
   <div class="form-group mt-4">
@@ -23,13 +25,26 @@
       placeholder="Enter Your Password *"
       class="form-control"
       id="exampleInputPassword1"
+      formControlName="password"
     />
     <span (click)="togglePass()" class="eyeIcon"><i [class]="eyes"></i></span>
   </div>
-  <input type="text" class="form-control" placeholder="Role " list="list" />
+  <input
+    type="text"
+    class="form-control"
+    formControlName="role"
+    placeholder="Role "
+    list="list"
+  />
   <datalist id="list">
     <option value="Admin"></option>
     <option value="user"></option>
   </datalist>
-  <button type="submit" class="mybtn btn btn-dark btn-sm">Login</button>
+  <button
+    [disabled]="regForm?.invalid"
+    type="submit"
+    class="mybtn btn btn-dark btn-sm"
+  >
+    register patient
+  </button>
 </form>

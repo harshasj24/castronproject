@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row">
+    <div
+      *ngFor="let u of userDetails.data"
+      class="col-lg-4 col-6-md col-12-sm mt-5"
+    >
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{ u.fName | uppercase }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ u.email }}</h6>
+
+          <a
+            href="#"
+            data-toggle="modal"
+            data-target="#staticBackdrop"
+            class="card-link"
+            (click)="edit(u.email)"
+            >Edit</a
+          >
+          <a href="#" class="card-link">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="regForm"
+          (ngSubmit)="regSubmit()"
+          class="mx-auto mt-5"
+        >
+          <h4 class="text-center">Please Register!</h4>
+          <div class="form-group mt-4">
+            <input
+              type="text"
+              placeholder="Enter Patient name*"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="fName"
+              
+            />
+          </div>
+          <div class="form-group mt-3">
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter Email *"
+              formControlName="email"
+            />
+          </div>
+          <div class="form-group mt-4">
+            <input
+              type="text"
+              placeholder="Enter Your Password *"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="password"
+            />
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="role"
+            placeholder="Role "
+            list="list"
+          />
+          <datalist id="list">
+            <option value="Admin"></option>
+            <option value="user"></option>
+          </datalist>
+          <button
+            [disabled]="regForm?.invalid"
+            type="submit"
+            class="mybtn btn btn-dark btn-sm"
+          >
+            register patient
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>

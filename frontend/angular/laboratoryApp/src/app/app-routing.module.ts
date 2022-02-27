@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { ThyroidComponent } from './thyroid/thyroid.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LoginComponent } from './login/login.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landingpage', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'entersamples/hemoglobin', component: HemoglobinComponent },
   { path: 'entersamples/glucometry', component: GlucometryComponent },
   { path: 'entersamples/thyroid', component: ThyroidComponent },
+  { path: 'userdetails', component: UserdetailsComponent },
 ];
 
 @NgModule({

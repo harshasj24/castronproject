@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav *ngIf="serv.islogin | async" class="navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand" href="#">Laboratory</a>
   <button
     class="navbar-toggler"
@@ -14,12 +14,17 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" *ngIf="flag" routerLink="dashbord" href="">Home </a>
+        <a class="nav-link" *ngIf="serv.role" routerLink="dashbord" href=""
+          >Home
+        </a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" routerLink="login" href=""
           >Login <span class="sr-only">(current)</span></a
         >
+      </li>
+      <li class="nav-item active">
+        <a (click)="logout()" class="nav-link" href="/login">logout </a>
       </li>
     </ul>
   </div>

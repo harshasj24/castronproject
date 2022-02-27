@@ -10,8 +10,12 @@ router.get("/msg", (req, res) => {
   });
 });
 
+router.get("/alldata", userController.allUserDetails);
+
 router.post("/signup", userController.signup);
 
 router.post("/login", userController.login);
+
+router.get("/oneUserdetails/:email", userController.getOneUser);
 
 module.exports = router;

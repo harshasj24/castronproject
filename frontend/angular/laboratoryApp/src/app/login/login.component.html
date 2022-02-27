@@ -14,11 +14,11 @@
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            formControlName="mail"
+            formControlName="email"
             placeholder="Email address"
           />
           <span><i class="fa fa-contact"></i></span>
-          <span *ngIf="mail?.invalid && mail?.touched" style="color: red"
+          <span *ngIf="email?.invalid && email?.touched" style="color: red"
             >*Invalid Email Id!</span
           >
         </div>
@@ -27,7 +27,7 @@
             [type]="passText"
             class="form-control"
             id="exampleInputPassword1"
-            formControlName="pass"
+            formControlName="password"
             placeholder="Password"
           />
 
@@ -36,7 +36,13 @@
           ></span>
         </div>
 
-        <button type="submit" class="btn btn-primary w-25 mt-4">Login</button>
+        <button
+          [disabled]="loginForm.invalid"
+          type="submit"
+          class="btn btn-primary w-25 mt-4"
+        >
+          Login
+        </button>
       </form>
 
       <p class="mt-5">

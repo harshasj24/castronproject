@@ -79,6 +79,10 @@ export class DashbordComponent implements OnInit {
   // dataA: any = JSON.parse(this.route.snapshot.queryParams.data);
 
   ngOnInit(): void {
+    if (!localStorage.getItem('token')) {
+      this.router.navigate(['/login']);
+    }
+
     window.addEventListener('beforeunload', function (e) {
       var confirmationMessage = 'o/';
       console.log('cond');
