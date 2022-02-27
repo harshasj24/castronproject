@@ -1,0 +1,35 @@
+<form class="mx-auto mt-5">
+  <h4 class="text-center">Please Register!</h4>
+  <div class="form-group mt-4">
+    <input
+      type="text"
+      placeholder="Enter Your Password *"
+      class="form-control"
+      id="exampleInputPassword1"
+    />
+  </div>
+  <div class="form-group mt-3">
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      placeholder="Enter your Email *"
+    />
+  </div>
+  <div class="form-group mt-4">
+    <input
+      [type]="passText"
+      placeholder="Enter Your Password *"
+      class="form-control"
+      id="exampleInputPassword1"
+    />
+    <span (click)="togglePass()" class="eyeIcon"><i [class]="eyes"></i></span>
+  </div>
+  <input type="text" class="form-control" placeholder="Role " list="list" />
+  <datalist id="list">
+    <option value="Admin"></option>
+    <option value="user"></option>
+  </datalist>
+  <button type="submit" class="mybtn btn btn-dark btn-sm">Login</button>
+</form>

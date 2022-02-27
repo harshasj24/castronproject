@@ -1,0 +1,27 @@
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const userRouter = require("./routes/user");
+const port = 4300;
+
+const dbUrl =
+  "mongodb+srv://Harsha_sj:harsha@cluster0.3ba50.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+mongoose.connect(dbUrl, {}, (err) => {
+  if (!err) {
+    console.log("Database Connected Sucessfully");
+  } else {
+    console.log(err);
+    console.log("failed to connect to Database");
+  }
+});
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json());
+
+app.use("/labs", userRouter);
+
+app.listen(port, () => {
+  console.log(`server is lisiting on ${port}`);
+});

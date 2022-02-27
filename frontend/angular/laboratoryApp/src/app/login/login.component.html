@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-lg-7">
+      <h1 class="text-center">labs Image to be addede here</h1>
+    </div>
+
+    <div class="col-lg-5 col-md-12">
+      <h1>Login in</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="send()" class="">
+        <!-- <h4 class="text-center">Please Login!</h4> -->
+        <div class="form-group mt-3">
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            formControlName="mail"
+            placeholder="Email address"
+          />
+          <span><i class="fa fa-contact"></i></span>
+          <span *ngIf="mail?.invalid && mail?.touched" style="color: red"
+            >*Invalid Email Id!</span
+          >
+        </div>
+        <div class="form-group mt-4">
+          <input
+            [type]="passText"
+            class="form-control"
+            id="exampleInputPassword1"
+            formControlName="pass"
+            placeholder="Password"
+          />
+
+          <span (click)="togglePass()" class="eyeIcon"
+            ><i [class]="eyes"></i
+          ></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-25 mt-4">Login</button>
+      </form>
+
+      <p class="mt-5">
+        Connect us with
+        <span>
+          <a class="ml-3 fb" href=""><i class="fa fa-facebook"></i> </a
+        ></span>
+
+        <a class="ml-3 tw" href=""><i class="fa fa-twitter"></i></a>
+        <a class="ml-3 gle" href=""> <i class="fa fa-google"> </i></a>
+      </p>
+    </div>
+  </div>
+</div>
