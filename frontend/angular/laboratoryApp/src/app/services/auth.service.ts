@@ -32,7 +32,7 @@ export class AuthService {
           this.role = true;
         }
       })
-    );
+    );    
   }
 
   getData() {

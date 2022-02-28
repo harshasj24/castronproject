@@ -5,6 +5,8 @@ const userRouter = require("./routes/user");
 const port = 4300;
 const cors = require("cors");
 
+const reportRouter = require("./routes/report");
+
 const dbUrl =
   "mongodb+srv://Harsha_sj:harsha@cluster0.3ba50.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -24,6 +26,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/labs", userRouter);
+
+app.use("/reports", reportRouter);
 
 app.listen(port, () => {
   console.log(`server is lisiting on ${port}`);

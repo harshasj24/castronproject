@@ -26,4 +26,16 @@ export class ApiService {
   updateOneUser(data: any) {
     return this.http.put('http://localhost:4300/labs/updateuser', data);
   }
+
+  usersReport() {
+    return this.http.get('http://localhost:4300/reports/viewreports');
+  }
+
+  allreports() {
+    return this.http.get('http://localhost:4300/reports/viewreports');
+  }
+
+  addReports(data: any) {
+    return this.http.post('http://localhost:4300/reports/addreports', data);
+  }
 }

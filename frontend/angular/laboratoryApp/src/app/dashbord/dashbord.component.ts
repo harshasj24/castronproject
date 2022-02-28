@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 
 // import { AuthService } from '../services/auth.service';
@@ -19,7 +20,8 @@ export class DashbordComponent implements OnInit {
   constructor(
     private servers: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private apiServices: ApiService
   ) {
     // console.log(this.sample.value, 'of constructor');
   }
@@ -74,6 +76,10 @@ export class DashbordComponent implements OnInit {
     }
   }
 
+  reportsData: any;
+
+  allReports: any;
+
   hemo() {}
 
   // dataA: any = JSON.parse(this.route.snapshot.queryParams.data);
@@ -102,13 +108,20 @@ export class DashbordComponent implements OnInit {
       if (this.data[9]) {
         this.data[0].thy.viewDetails = true;
       }
-      // console.log(this.data[0].hemo);.
-
-      // console.log(ind, this.data.patientName);
-      // if (data.hemoglobin) {
-      //   this.data[ind].hemo.addReport = true;
-      // }
     });
+
+    this.apiServices.usersReport().subscribe((data) => {
+      this.reportsData = data;
+      this.reportsData = this.reportsData.data;
+      console.log(this.reportsData._id);
+    });
+
+    this.apiServices.usersReport().subscribe((rep) => {
+      this.allReports = rep;
+      this.allReports = this.allReports.data;
+      console.log(rep);
+    });
+
     console.log('onlu once', this.sample.value);
   }
 }

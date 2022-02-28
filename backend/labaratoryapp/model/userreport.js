@@ -2,6 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const usersReportsSchema = new Schema({
+  date: {
+    type: String,
+    required: true,
+  },
+  fName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
   sampleId: {
     type: Number,
     required: true,
@@ -32,7 +44,7 @@ const usersReportsSchema = new Schema({
         type: String,
         required: true,
       },
-      lymphocytres: {
+      lymphocytes: {
         type: String,
         required: true,
       },

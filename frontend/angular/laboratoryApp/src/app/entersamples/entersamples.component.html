@@ -59,35 +59,24 @@
 <p>s</p>
 hemoglobin add -->
 
-<form [formGroup]="sample" (ngSubmit)="sampleFormData()" class="mx-auto">
+<form [formGroup]="sample" (ngSubmit)="sampleFormData()" class="mx-auto mt-5">
   <h4 class="text-center">Create Test</h4>
-  <div class="form-group">
-    <input
-      type="email"
-      class="form-control w-25 mx-auto"
-      id="exampleInputEmail1"
-      aria-describedby="emailHelp"
-      formControlName="patientName"
-      list="opts"
-      placeholder="select patient"
-    />
-  </div>
-  <datalist id="opts">
-    <option *ngFor="let n of names" [value]="n.name"></option>
-  </datalist>
+  <select formControlName="patientName" name="" id="">
+    <option [value]="n._id" *ngFor="let n of names">{{ n.fName }}</option>
+  </select>
 
-  <div class="form-group form-check ml-5">
+  <div class="form-group form-check ml-5 w-75 mx-auto">
     <input
       formControlName="hemoglobin"
       type="checkbox"
-      class="form-check-input"
+      class="form-check-input ml-4"
       id="exampleCheck1"
     />
-    <label class="form-check-label" for="exampleCheck1">Hemoglobin</label>
+    <label class="form-check-label ml-5" for="exampleCheck1 ">Hemoglobin</label>
   </div>
   <div *ngIf="hemoglobin?.value" class="container">
     <div>
-      <form class="mx-auto">
+      <form [formGroup]="hemoForm" class="mx-auto">
         <h4 class="">Hemoglobin Report</h4>
         <div class="row mt-3">
           <div class="col-6">
@@ -98,6 +87,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Haemoglobin"
+                formControlName="hemoglobin"
               />
             </div>
           </div>
@@ -109,6 +99,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Total Count/ WBC"
+                formControlName="totalCount"
               />
             </div>
           </div>
@@ -120,6 +111,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Neutrophils"
+                formControlName="neutrophils"
               />
             </div>
           </div>
@@ -131,6 +123,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Lymphocytes"
+                formControlName="lymphocytes"
               />
             </div>
           </div>
@@ -142,6 +135,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Eosinophiles"
+                formControlName="eosinophiles"
               />
             </div>
           </div>
@@ -153,6 +147,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Monocytes"
+                formControlName="monocytes"
               />
             </div>
           </div>
@@ -164,6 +159,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Basophills"
+                formControlName="basophills"
               />
             </div>
           </div>
@@ -175,6 +171,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Red blood cells (RBC)"
+                formControlName="redBloodCells"
               />
             </div>
           </div>
@@ -186,6 +183,7 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Packed Cell Volume (PVC)"
+                formControlName="pavkedCellVolume"
               />
             </div>
           </div>
@@ -197,26 +195,29 @@ hemoglobin add -->
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="MEAN Corpuscular Volume (MVC)"
+                formControlName="mvc"
               />
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+        <button type="submit" class="btn btn-primary btn-sm mb-5">
+          Submit
+        </button>
       </form>
     </div>
   </div>
-  <div class="form-group form-check ml-5">
+  <div class="form-group form-check ml-5 w-75 mx-auto">
     <input
       formControlName="glucometry"
       type="checkbox"
-      class="form-check-input"
+      class="form-check-input ml-4"
       id="exampleCheck2"
     />
-    <label class="form-check-label" for="exampleCheck2">Glucometry</label>
+    <label class="form-check-label ml-5" for="exampleCheck2">Glucometry</label>
   </div>
   <div *ngIf="glucometry?.value" class="container">
-    <form class="">
+    <form [formGroup]="glucoForm" class="">
       <h4 class="text-center">Glucometry Report</h4>
       <div class="row mt-3">
         <div class="col-6">
@@ -227,6 +228,7 @@ hemoglobin add -->
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Fasting Blood Sugar"
+              formControlName="fastingbloodsugar"
             />
           </div>
         </div>
@@ -238,6 +240,7 @@ hemoglobin add -->
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Post Prandial Blood Sugar"
+              formControlName="postprandilabloodsugar"
             />
           </div>
         </div>
@@ -249,6 +252,7 @@ hemoglobin add -->
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Glycosylated Hamoglobin (HbA1C)"
+              formControlName="hba1c"
             />
           </div>
         </div>
@@ -260,25 +264,28 @@ hemoglobin add -->
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Calcium"
+              formControlName="calcium"
             />
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+      <button type="submit" class="btn btn-primary btn-sm mb-5">Submit</button>
     </form>
   </div>
 
-  <div class="form-group form-check ml-4">
+  <div class="form-group form-check ml-5 w-75 mx-auto">
     <input
       formControlName="thyroid"
       type="checkbox"
-      class="form-check-input"
+      class="form-check-input ml-4"
       id="exampleCheck3"
     />
-    <label class="form-check-label" for="exampleCheck3">Thyroid Profile</label>
+    <label class="form-check-label ml-5" for="exampleCheck3"
+      >Thyroid Profile</label
+    >
   </div>
   <div *ngIf="thyroid?.value">
-    <form class="w-25 mx-auto">
+    <form [formGroup]="thyForm" class="w-25 mx-auto">
       <h4 class="text-center">Thyroid Report</h4>
       <div class="row mt-3">
         <div class="col-6">
@@ -289,7 +296,7 @@ hemoglobin add -->
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="TRI IODD Thyronine-T3 Total"
-              formControlName="tri"
+              formControlName="t3Total"
             />
           </div>
         </div>
@@ -301,7 +308,7 @@ hemoglobin add -->
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Thyroxine-T4"
-              formControlName="Thyroxine"
+              formControlName="thyroxine"
             />
           </div>
         </div>
@@ -319,7 +326,10 @@ hemoglobin add -->
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+      <button type="submit" class="btn btn-primary btn-sm mb-5">Submit</button>
     </form>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
   </div>
 </form>
