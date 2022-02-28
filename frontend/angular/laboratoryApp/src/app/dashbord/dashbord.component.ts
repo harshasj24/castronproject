@@ -80,11 +80,51 @@ export class DashbordComponent implements OnInit {
 
   allReports: any;
 
+  heomoglobinReport: any = [];
+  glucometryReport: any = [];
+  thyroidReport: any = [];
+
   hemo() {}
+
+  userReport: any = '';
+
+  viewReport(_id: any) {
+    this.apiServices.viewOneReport(_id).subscribe((val) => {
+      this.userReport = val;
+      console.log(val);
+      this.userReport = val;
+      this.heomoglobinReport = this.userReport.data.haematology[0];
+      // this.glucometryReport = this.userReport.data.glucometry[0];
+      // this.thyroidReport = this.userReport.data.thyroid[0];
+
+      console.log('thy', this.glucometry);
+    });
+  }
+  viewReportglu(_id: any) {
+    this.apiServices.viewOneReport(_id).subscribe((val) => {
+      this.userReport = val;
+      console.log(val);
+      this.userReport = val;
+
+      this.glucometryReport = this.userReport.data.glucometry[0];
+
+      console.log('thy', this.glucometry);
+    });
+  }
+  viewReportthy(_id: any) {
+    this.apiServices.viewOneReport(_id).subscribe((val) => {
+      this.userReport = val;
+      console.log(val);
+      this.userReport = val;
+      this.thyroidReport = this.userReport.data.thyroid[0];
+    });
+  }
 
   // dataA: any = JSON.parse(this.route.snapshot.queryParams.data);
 
   ngOnInit(): void {
+    console.log('one', this.userReport);
+
     if (!localStorage.getItem('token')) {
       this.router.navigate(['/login']);
     }

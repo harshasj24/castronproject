@@ -10,7 +10,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./entersamples.component.css'],
 })
 export class EntersamplesComponent implements OnInit, AfterViewInit {
-  constructor(private apiServices: ApiService) {}
+  constructor(private apiServices: ApiService, private router: Router) {}
   sample = new FormGroup({
     patientName: new FormControl('', [Validators.required]),
     hemoglobin: new FormControl(''),
@@ -39,31 +39,31 @@ export class EntersamplesComponent implements OnInit, AfterViewInit {
     this.count++;
   }
   hemoForm = new FormGroup({
-    hemoglobin: new FormControl(''),
-    neutrophils: new FormControl(''),
-    eosinophiles: new FormControl(''),
-    basophills: new FormControl(''),
-    pavkedCellVolume: new FormControl(''),
-    totalCount: new FormControl(''),
-    lymphocytes: new FormControl(''),
-    monocytes: new FormControl(''),
-    redBloodCells: new FormControl(''),
-    mvc: new FormControl(''),
+    hemoglobin: new FormControl('', Validators.required),
+    neutrophils: new FormControl('', Validators.required),
+    eosinophiles: new FormControl('', Validators.required),
+    basophills: new FormControl('', Validators.required),
+    pavkedCellVolume: new FormControl('', Validators.required),
+    totalCount: new FormControl('', Validators.required),
+    lymphocytes: new FormControl('', Validators.required),
+    monocytes: new FormControl('', Validators.required),
+    redBloodCells: new FormControl('', Validators.required),
+    mvc: new FormControl('', Validators.required),
   });
 
   glucoForm = new FormGroup({
-    fastingbloodsugar: new FormControl(''),
+    fastingbloodsugar: new FormControl('', Validators.required),
 
-    postprandilabloodsugar: new FormControl(''),
-    hba1c: new FormControl(''),
-    calcium: new FormControl(''),
+    postprandilabloodsugar: new FormControl('', Validators.required),
+    hba1c: new FormControl('', Validators.required),
+    calcium: new FormControl('', Validators.required),
   });
 
   thyForm = new FormGroup({
-    t3Total: new FormControl(''),
+    t3Total: new FormControl('', Validators.required),
 
-    thyroxine: new FormControl(''),
-    tsh: new FormControl(''),
+    thyroxine: new FormControl('', Validators.required),
+    tsh: new FormControl('', Validators.required),
   });
 
   sampleFormData() {
@@ -72,15 +72,42 @@ export class EntersamplesComponent implements OnInit, AfterViewInit {
     let date = new Date();
     let sampleDate = `${date.getMonth()} ${date.getDay()},${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     let sId = Math.floor(Math.random() * 100);
+
+    let hemo: any = [];
+    let gluR: any = [];
+    let thy: any = [];
+    if (this.hemoglobin?.value) {
+      hemo = [this.hemoForm.value];
+    }
+
+    if (this.glucometry?.value) {
+      gluR = [this.glucoForm.value];
+    }
+
+    if (this.thyroid?.value) {
+      thy = [this.thyForm.value];
+    }
+
     let mydata = {
       _id: this.patientName?.value,
       date: sampleDate,
       sampleId: sId,
-      haematology: [this.hemoForm.value],
+      haematology: hemo,
+      glucometry: gluR,
+      thyroid: thy,
     };
-    this.apiServices.addReports(mydata).subscribe((val) => {
-      console.log(val);
-    });
+
+    if (
+      (this.hemoForm.valid || this.glucoForm.valid || this.thyForm.valid) &&
+      this.patientName?.value
+    ) {
+      this.apiServices.addReports(mydata).subscribe((val) => {
+        console.log(val);
+      });
+      this.router.navigate(['/dashbord']);
+    } else {
+      window.alert('please provide the details');
+    }
   }
   names: any;
   ngOnInit(): void {

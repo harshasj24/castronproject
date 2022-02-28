@@ -38,4 +38,8 @@ export class ApiService {
   addReports(data: any) {
     return this.http.post('http://localhost:4300/reports/addreports', data);
   }
+
+  viewOneReport(_id: any) {
+    return this.http.get(`http://localhost:4300/reports/viewreport/${_id}`);
+  }
 }

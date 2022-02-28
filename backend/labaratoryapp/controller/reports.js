@@ -8,6 +8,7 @@ let addReport1 = async (req, res, next) => {
     const isPatient = await usersData.findOne({ _id }).lean();
     if (isPatient) {
       let { email } = isPatient;
+
       await reports.insertMany([
         {
           date,
@@ -19,6 +20,7 @@ let addReport1 = async (req, res, next) => {
           thyroid,
         },
       ]);
+
       res.json({
         error: false,
         message: "Data added sucessfully",
@@ -68,18 +70,14 @@ let updateUser = async (req, res, next) => {
 let getReports = async (req, res, next) => {
   let _id = req.params._id;
   const reportData = await reports.findOne({ _id }).lean();
-  if (reportData.hemotology || reportData.glucometry || reportData.thyroid) {
+  try {
     res.json({
       error: false,
-      message: "data fetched Sucessfully",
+      message: "data fetched ff Sucessfully",
       data: reportData,
     });
-  } else {
-    res.json({
-      error: true,
-      message: "no data",
-      data: null,
-    });
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -87,4 +85,5 @@ module.exports = {
   addReport1,
   viewReports,
   updateUser,
+  getReports,
 };

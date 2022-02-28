@@ -1,170 +1,73 @@
-<script>
-  window.onbeforeunload = function () {
-    return window.confirm("data will be lost");
-  };
-  // window.onbeforeunload = null;
-</script>
+<datalist id="opts">
+  <option *ngFor="let n of data">{{ n.name }}</option>
+</datalist>
+<table class="table mt-4">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Sample Date</th>
+      <th scope="col">Patient Name</th>
+      <th scope="col">Email ID</th>
+      <th scope="col">Sample ID</th>
+      <th scope="col">Haemotology</th>
+      <th scope="col">Thyriod Profile</th>
+      <th scope="col">Glucometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of allReports">
+      <td>{{ r.date }}</td>
+      <td>{{ r.fName }}</td>
+      <td>{{ r.email }}</td>
+      <td>{{ r.sampleId }}</td>
+      <td>
+        <Button *ngIf="r.haematology.length === 0" class="btn btn-light"
+          >NA</Button
+        >
 
-<div class="container">
-  <!-- Button trigger modal -->
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-toggle="modal"
-    data-target="#exampleModal"
-  >
-    Launch demo modal
-  </button>
+        <Button
+          data-toggle="modal"
+          (click)="viewReport(r._id)"
+          data-target="#exampleModal12"
+          *ngIf="r.haematology.length !== 0"
+          class="btn btn-success"
+          >View Details</Button
+        >
+      </td>
+      <td>
+        <Button *ngIf="r.glucometry.length === 0" class="btn btn-light"
+          >NA</Button
+        >
 
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="sample" (ngSubmit)="sampleFormData()" class="">
-            <h4 class="text-center">Create Test</h4>
-            <div class="form-group">
-              <input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                list="opts"
-                formControlName="patientName"
-              />
-            </div>
+        <Button
+          data-toggle="modal"
+          (click)="viewReportglu(r._id)"
+          data-target="#exampleModal13"
+          *ngIf="r.glucometry.length != 0"
+          class="btn btn-success"
+          >View Details</Button
+        >
+      </td>
+      <td>
+        <Button *ngIf="r.thyroid.length === 0" class="btn btn-light">NA</Button>
 
-            <div class="form-group form-check ml-4">
-              <input
-                formControlName="hemoglobin"
-                type="checkbox"
-                class="form-check-input"
-                id="exampleCheck1"
-              />
-              <label class="form-check-label" for="exampleCheck1"
-                >Hemoglobin</label
-              >
-            </div>
-            <div class="form-group form-check ml-4">
-              <input
-                formControlName="glucometry"
-                type="checkbox"
-                class="form-check-input"
-                id="exampleCheck2"
-              />
-              <label class="form-check-label" for="exampleCheck2"
-                >Glucometry</label
-              >
-            </div>
-            <div class="form-group form-check ml-4">
-              <input
-                formControlName="thyroid"
-                type="checkbox"
-                class="form-check-input"
-                id="exampleCheck3"
-              />
-              <label class="form-check-label" for="exampleCheck3"
-                >Thyroid Profile</label
-              >
-            </div>
-            <button
-              type="submit"
-              [disabled]="
-                sample.invalid ||
-                (!hemoglobin?.value && !glucometry?.value && !thyroid?.value)
-              "
-              class="btn btn-primary btn-sm"
-            >
-              Submit
-            </button>
+        <Button
+          data-toggle="modal"
+          (click)="viewReportthy(r._id)"
+          data-target="#exampleModal14"
+          *ngIf="r.thyroid.length != 0"
+          class="btn btn-success"
+          >View Details</Button
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-            <i class="fa-solid fa-paper-plane-top"></i>
-          </form>
-
-          <!-- hemoglobin add -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <datalist id="opts">
-    <option *ngFor="let n of data">{{ n.name }}</option>
-  </datalist>
-  <table class="table mt-4">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Sample Date</th>
-        <th scope="col">Patient Name</th>
-        <th scope="col">Email ID</th>
-        <th scope="col">Sample ID</th>
-        <th scope="col">Haemotology</th>
-        <th scope="col">Thyriod Profile</th>
-        <th scope="col">Glucometry</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let r of allReports">
-        <td>{{ r.date }}</td>
-        <td>{{ r.fName }}</td>
-        <td>{{ r.email }}</td>
-        <td>{{ r.sampleId }}</td>
-        <td>
-          <Button *ngIf="r.haematology.length === 0" class="btn btn-light"
-            >NA</Button
-          >
-
-          <Button *ngIf="r.haematology.length !== 0" class="btn btn-success"
-            >View Details</Button
-          >
-        </td>
-        <td>
-          <Button *ngIf="r.glucometry.length === 0" class="btn btn-light"
-            >NA</Button
-          >
-
-          <Button *ngIf="r.glucometry.length != 0" class="btn btn-success"
-            >View Details</Button
-          >
-        </td>
-        <td>
-          <Button *ngIf="r.thyroid.length === 0" class="btn btn-light"
-            >NA</Button
-          >
-
-          <Button *ngIf="r.thyroid.length != 0" class="btn btn-success"
-            >View Details</Button
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<!-- hemotology starts -->
 
 <div
   class="modal fade"
-  id="exampleModal1"
+  id="exampleModal12"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
@@ -184,7 +87,7 @@
       </div>
       <div class="modal-body">
         <div>
-          <form (ngSubmit)="hemo()" class="w-25 mx-auto">
+          <form (ngSubmit)="hemo()" class="mx-auto">
             <h4 class="text-center">Hemoglobin Report</h4>
             <div class="row mt-3">
               <div class="col-6">
@@ -194,7 +97,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Haemoglobin"
+                    [value]="heomoglobinReport.hemoglobin"
                   />
                 </div>
               </div>
@@ -205,7 +108,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Total Count/WBC"
+                    [value]="heomoglobinReport.totalCount"
                   />
                 </div>
               </div>
@@ -216,7 +119,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Haemoglobin"
+                    [value]="heomoglobinReport.neutrophils"
                   />
                 </div>
               </div>
@@ -227,7 +130,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Total Count/WBC"
+                    [value]="heomoglobinReport.lymphocytes"
                   />
                 </div>
               </div>
@@ -238,7 +141,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Haemoglobin"
+                    [value]="heomoglobinReport.eosinophiles"
                   />
                 </div>
               </div>
@@ -249,7 +152,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Total Count/WBC"
+                    [value]="heomoglobinReport.basophills"
                   />
                 </div>
               </div>
@@ -260,7 +163,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Haemoglobin"
+                    [value]="heomoglobinReport.monocytes"
                   />
                 </div>
               </div>
@@ -271,7 +174,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Total Count/WBC"
+                    [value]="heomoglobinReport.redBloodCells"
                   />
                 </div>
               </div>
@@ -282,7 +185,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Haemoglobin"
+                    [value]="heomoglobinReport.pavkedCellVolume"
                   />
                 </div>
               </div>
@@ -293,7 +196,7 @@
                     class="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="Total Count/WBC"
+                    [value]="heomoglobinReport.mvc"
                   />
                 </div>
               </div>
@@ -310,6 +213,182 @@
           Close
         </button>
         <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- hemotology ends -->
+
+<!-- glucometry model starts -->
+
+<div
+  class="modal fade"
+  id="exampleModal13"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <!-- body -->
+          <form class="">
+            <h4 class="text-center">Glucometry Report</h4>
+            <div class="row mt-3">
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Fasting Blood Sugar"
+                    [value]="glucometryReport.fastingbloodsugar"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Post Prandial Blood Sugar"
+                    [value]="glucometryReport.postprandilabloodsugar"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Glycosylated Hamoglobin (HbA1C)"
+                    [value]="glucometryReport.hba1c"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Calcium"
+                    [value]="glucometryReport.calcium"
+                  />
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm mb-5">
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <!-- hemoglobin add -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- glucometry model ends -->
+
+<div
+  class="modal fade"
+  id="exampleModal14"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <!-- body -->
+          <form class="mx-auto">
+            <h4 class="text-center">Thyroid Report</h4>
+            <div class="row mt-3">
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="TRI IODD Thyronine-T3 Total"
+                    [value]="thyroidReport.t3Total"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Thyroxine-T4"
+                    [value]="thyroidReport.thyroxine"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Thyroid Stimulating Harmone (TSH) "
+                    [value]="thyroidReport.tsh"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- hemoglobin add -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
