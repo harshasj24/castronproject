@@ -46,4 +46,8 @@ export class ApiService {
   editReport(data: any) {
     return this.http.put('http://localhost:4300/reports/updaterep', data);
   }
+
+  userReports(_id:any) {
+    return this.http.get(`http://localhost:4300/reports/userSamples/${_id}`);
+  }
 }

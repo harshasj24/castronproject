@@ -68,8 +68,26 @@ let updateUser = async (req, res, next) => {
   } catch {}
 };
 
+let getOneUser = async (req, res, next) => {
+  let _id = req.params._id;
+  try {
+    const myEmail = await usersData
+      .findOne({ _id }, { email: 1, _id: 0 })
+      .lean();
+    let { email } = myEmail;
+    const report = await reports.findOne({ email }).lean();
+    res.json({
+      error: false,
+      message: "Scuessfully fetched data",
+      data: report,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 module.exports = {
   addReport1,
   viewReports,
   updateUser,
+  getOneUser,
 };

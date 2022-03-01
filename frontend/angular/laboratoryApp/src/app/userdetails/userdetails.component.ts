@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./userdetails.component.css'],
 })
 export class UserdetailsComponent implements OnInit {
-  constructor(private apiServices: ApiService) {}
+  constructor(private apiServices: ApiService, private route: ActivatedRoute) {}
 
   regForm = new FormGroup({
     fName: new FormControl('', Validators.required),
@@ -36,15 +37,15 @@ export class UserdetailsComponent implements OnInit {
       console.log(val);
     });
   }
+  viewReport(_id: any) {}
+  viewReportthy(_id: any) {}
+  viewReportglu(_id: any) {}
+  allReports: any;
   ngOnInit(): void {
     this.apiServices.userDetails().subscribe((val) => {
       console.log(val);
 
       this.userDetails = val;
     });
-    let date = new Date();
-
-    let time = `${date.getHours() - 12} ${date.getMinutes()} `;
-    console.log(time);
   }
 }

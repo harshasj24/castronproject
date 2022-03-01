@@ -39,7 +39,7 @@ const routes: Routes = [
     component: UserdetailsComponent,
     canActivate: [AuthgardGuard],
   },
-  { path: 'yoursample', component: UserdashbordComponent },
+  { path: 'yoursample/:_id', component: UserdashbordComponent },
 ];
 
 @NgModule({

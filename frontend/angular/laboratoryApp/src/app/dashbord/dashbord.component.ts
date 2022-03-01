@@ -165,18 +165,7 @@ export class DashbordComponent implements OnInit {
     });
 
     //
-    this.servers.getData().subscribe((val) => {
-      this.data = val;
-
-      for (const i of this.data) {
-        i['hemo'] = { hemoNa: true, addReport: false, viewDetails: false };
-        i['glu'] = { gluNa: true, addReport: false, viewDetails: false };
-        i['thy'] = { thyNa: true, addReport: false, viewDetails: false };
-      }
-      if (this.data[9]) {
-        this.data[0].thy.viewDetails = true;
-      }
-    });
+   
 
     this.apiServices.usersReport().subscribe((data) => {
       this.reportsData = data;
