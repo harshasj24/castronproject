@@ -41,12 +41,15 @@ export class LoginComponent implements OnInit {
   }
 
   msg: any;
+  errMsg: any = '';
 
   send() {
     console.log(this.loginForm.value);
 
     this.authServices.login(this.loginForm.value).subscribe((val) => {
       this.msg = val;
+      this.errMsg = val;
+
       console.log(this.msg);
 
       if (this.msg.data.role === 'Admin') {

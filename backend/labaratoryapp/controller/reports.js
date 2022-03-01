@@ -50,13 +50,13 @@ let viewReports = async (req, res, next) => {
 };
 
 let updateUser = async (req, res, next) => {
-  let { _id, thyroid, glucometry, hemotology } = req.body;
+  let { _id, thyroid, glucometry, haematology } = req.body;
   try {
     await reports.updateOne(
       { _id },
       {
         glucometry,
-        hemotology,
+        haematology,
         thyroid,
       }
     );

@@ -47,6 +47,18 @@ export class DashbordComponent implements OnInit {
   get thyroid() {
     return this.sample.get('thyroid');
   }
+  hemoForm = new FormGroup({
+    hemoglobin: new FormControl('', Validators.required),
+    neutrophils: new FormControl('', Validators.required),
+    eosinophiles: new FormControl('', Validators.required),
+    basophills: new FormControl('', Validators.required),
+    pavkedCellVolume: new FormControl('', Validators.required),
+    totalCount: new FormControl('', Validators.required),
+    lymphocytes: new FormControl('', Validators.required),
+    monocytes: new FormControl('', Validators.required),
+    redBloodCells: new FormControl('', Validators.required),
+    mvc: new FormControl('', Validators.required),
+  });
 
   data: any;
   glucoForm = new FormGroup({
@@ -56,34 +68,39 @@ export class DashbordComponent implements OnInit {
     hba1c: new FormControl('', Validators.required),
     calcium: new FormControl('', Validators.required),
   });
+  thyForm = new FormGroup({
+    t3Total: new FormControl('', Validators.required),
 
-  hemoData() {}
+    thyroxine: new FormControl('', Validators.required),
+    tsh: new FormControl('', Validators.required),
+  });
 
-  sampleFormData() {
-    let data: any = this.sample.value.patientName;
-    this.router.navigate(['/dashbord']);
-    let ind = this.data.findIndex((val: any) => {
-      console.log(val.name);
+  newa: any;
+  uId: any;
 
-      return val.name === data;
-    });
-    console.log(this.patientName?.value);
-    console.log(ind);
-    let { hemoglobin } = this.sample.value;
-    console.log('he', this.data);
-    if (hemoglobin) {
-      this.data[ind].hemo.addReport = true;
-      this.data[ind].hemo.hemoNa = false;
-    }
-    if (this.glucometry?.value) {
-      this.data[ind].glu.addReport = true;
-      this.data[ind].glu.gluNa = false;
-    }
-    if (this.thyroid?.value) {
-      this.data[ind].thy.addReport = true;
-      this.data[ind].thy.thyNa = false;
-    }
+  glucoData() {
+    this.apiServices
+      .editReport({ _id: this.uId, glucometry: this.glucoForm.value })
+      .subscribe((val) => {});
   }
+
+  hemoData() {
+    console.log(this.hemoForm.value);
+
+    this.apiServices
+      .editReport({ _id: this.uId, haematology: this.hemoForm.value })
+      .subscribe((val) => {
+        console.log(val);
+      });
+  }
+  thyData() {
+    this.apiServices
+      .editReport({ _id: this.uId, thyroid: this.thyForm.value })
+      .subscribe((val) => {
+        console.log(val);
+      });
+  }
+  sampleFormData() {}
 
   reportsData: any;
 
@@ -98,21 +115,16 @@ export class DashbordComponent implements OnInit {
   userReport: any = '';
 
   viewReport(_id: any) {
-    this.apiServices.allreports().subscribe((val) => {
-      console.log(val);
-      this.arr = val;
-      for (const i of this.arr.data) {
-        if (_id === i._id) {
-          this.heomoglobinReport = i.haematology[0];
-        }
+    this.uId = _id;
+    for (const i of this.arr.data) {
+      if (_id === i._id) {
+        this.heomoglobinReport = i.haematology[0];
       }
-    });
+    }
   }
   arr: any;
-
-  newa: any;
-
   viewReportglu(_id: any) {
+    this.uId = _id;
     // this.apiServices.viewOneReport(_id).subscribe((val) => {
     //   this.userReport = val;
     //   console.log(val);
@@ -121,36 +133,29 @@ export class DashbordComponent implements OnInit {
     //   this.glucometryReport = this.userReport.data.glucometry[0];
 
     console.log('thy', this.glucometry);
-    this.apiServices.allreports().subscribe((val) => {
-      console.log(val);
-      this.arr = val;
-      for (const i of this.arr.data) {
-        if (_id === i._id) {
-          this.glucometryReport = i.glucometry[0];
-        }
+
+    for (const i of this.arr.data) {
+      if (_id === i._id) {
+        this.glucometryReport = i.glucometry[0];
       }
-    });
+    }
   }
   viewReportthy(_id: any) {
+    this.uId = _id;
+    for (const i of this.arr.data) {
+      if (_id === i._id) {
+        this.thyroidReport = i.thyroid[0];
+      }
+    }
+  }
+
+  ngOnInit(): void {
+    console.log('one', this.newa);
+
     this.apiServices.allreports().subscribe((val) => {
       console.log(val);
       this.arr = val;
-      for (const i of this.arr.data) {
-        if (_id === i._id) {
-          this.thyroidReport = i.thyroid[0];
-        }
-      }
     });
-  }
-
-  // dataA: any = JSON.parse(this.route.snapshot.queryParams.data);
-
-  ngOnInit(): void {
-    console.log('one', this.userReport);
-
-    // if (!localStorage.getItem('token')) {
-    //   this.router.navigate(['/login']);
-    // }
 
     window.addEventListener('beforeunload', function (e) {
       var confirmationMessage = 'o/';
@@ -162,7 +167,7 @@ export class DashbordComponent implements OnInit {
     //
     this.servers.getData().subscribe((val) => {
       this.data = val;
-      // console.log(this.data);
+
       for (const i of this.data) {
         i['hemo'] = { hemoNa: true, addReport: false, viewDetails: false };
         i['glu'] = { gluNa: true, addReport: false, viewDetails: false };

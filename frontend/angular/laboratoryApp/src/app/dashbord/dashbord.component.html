@@ -90,7 +90,11 @@
         </div>
         <div class="modal-body">
           <div>
-            <form (ngSubmit)="hemo()" class="mx-auto">
+            <form
+              [formGroup]="hemoForm"
+              (ngSubmit)="hemoData()"
+              class="mx-auto"
+            >
               <h4 class="text-center">Hemoglobin Report</h4>
               <div class="row mt-3">
                 <div class="col-6">
@@ -100,7 +104,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.hemoglobin"
+                      formControlName="hemoglobin"
+                      [(ngModel)]="heomoglobinReport.hemoglobin"
                     />
                   </div>
                 </div>
@@ -111,7 +116,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.totalCount"
+                      formControlName="totalCount"
+                      [(ngModel)]="heomoglobinReport.totalCount"
                     />
                   </div>
                 </div>
@@ -122,7 +128,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.neutrophils"
+                      formControlName="neutrophils"
+                      [(ngModel)]="heomoglobinReport.neutrophils"
                     />
                   </div>
                 </div>
@@ -133,7 +140,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.lymphocytes"
+                      formControlName="lymphocytes"
+                      [(ngModel)]="heomoglobinReport.lymphocytes"
                     />
                   </div>
                 </div>
@@ -144,7 +152,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.eosinophiles"
+                      formControlName="eosinophiles"
+                      [(ngModel)]="heomoglobinReport.eosinophiles"
                     />
                   </div>
                 </div>
@@ -155,7 +164,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.basophills"
+                      formControlName="basophills"
+                      [(ngModel)]="heomoglobinReport.basophills"
                     />
                   </div>
                 </div>
@@ -166,7 +176,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.monocytes"
+                      formControlName="monocytes"
+                      [(ngModel)]="heomoglobinReport.monocytes"
                     />
                   </div>
                 </div>
@@ -177,7 +188,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.redBloodCells"
+                      formControlName="redBloodCells"
+                      [(ngModel)]="heomoglobinReport.redBloodCells"
                     />
                   </div>
                 </div>
@@ -188,7 +200,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.pavkedCellVolume"
+                      formControlName="pavkedCellVolume"
+                      [(ngModel)]="heomoglobinReport.pavkedCellVolume"
                     />
                   </div>
                 </div>
@@ -199,7 +212,8 @@
                       class="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
-                      [value]="heomoglobinReport.mvc"
+                      formControlName="mvc"
+                      [(ngModel)]="heomoglobinReport.mvc"
                     />
                   </div>
                 </div>
@@ -250,7 +264,7 @@
         <div class="modal-body">
           <div>
             <!-- body -->
-            <form [formGroup]="glucoForm" class="">
+            <form [formGroup]="glucoForm" (ngSubmit)="glucoData()" class="">
               <h4 class="text-center">Glucometry Report</h4>
               <div class="row mt-3">
                 <div class="col-6">
@@ -261,8 +275,8 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Fasting Blood Sugar"
-                      [value]="glucometryReport.fastingbloodsugar"
                       formControlName="fastingbloodsugar"
+                      [(ngModel)]="glucometryReport.fastingbloodsugar"
                     />
                   </div>
                 </div>
@@ -274,8 +288,8 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Post Prandial Blood Sugar"
-                      [value]="glucometryReport.postprandilabloodsugar"
                       formControlName="postprandilabloodsugar"
+                      [(ngModel)]="glucometryReport.postprandilabloodsugar"
                     />
                   </div>
                 </div>
@@ -287,8 +301,8 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Glycosylated Hamoglobin (HbA1C)"
-                      [value]="glucometryReport.hba1c"
                       formControlName="hba1c"
+                      [(ngModel)]="glucometryReport.hba1c"
                     />
                   </div>
                 </div>
@@ -300,8 +314,8 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Calcium"
-                      [value]="glucometryReport.calcium"
                       formControlName="calcium"
+                      [(ngModel)]="glucometryReport.calcium"
                     />
                   </div>
                 </div>
@@ -348,7 +362,7 @@
         <div class="modal-body">
           <div>
             <!-- body -->
-            <form class="mx-auto">
+            <form [formGroup]="thyForm" (ngSubmit)="thyData()" class="mx-auto">
               <h4 class="text-center">Thyroid Report</h4>
               <div class="row mt-3">
                 <div class="col-6">
@@ -359,7 +373,8 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="TRI IODD Thyronine-T3 Total"
-                      [value]="thyroidReport.t3Total"
+                      formControlName="t3Total"
+                      [(ngModel)]="thyroidReport.t3Total"
                     />
                   </div>
                 </div>
@@ -371,7 +386,8 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Thyroxine-T4"
-                      [value]="thyroidReport.thyroxine"
+                      formControlName="thyroxine"
+                      [(ngModel)]="thyroidReport.thyroxine"
                     />
                   </div>
                 </div>
@@ -383,10 +399,30 @@
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Thyroid Stimulating Harmone (TSH) "
-                      [value]="thyroidReport.tsh"
+                      [(ngModel)]="thyroidReport.tsh"
+                      formControlName="tsh"
                     />
                   </div>
                 </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group form-check w-75">
+                  <input
+                    formControlName="editchek"
+                    type="checkbox"
+                    class="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label class="form-check-label" for="exampleCheck1 "
+                    >Hemoglobin</label
+                  >
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary btn-sm mb-5">
+                  Edit
+                </button>
               </div>
             </form>
 

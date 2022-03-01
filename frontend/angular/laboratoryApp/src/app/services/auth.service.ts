@@ -28,7 +28,7 @@ export class AuthService {
       tap((responce: any) => {
         if (!responce.error) {
           localStorage.setItem('token', responce.data.token);
-          localStorage.setItem("role",responce.data.role)
+          localStorage.setItem('role', responce.data.role);
           this.islogedin.next(true);
           this.role = responce.data.role;
         }
@@ -42,5 +42,13 @@ export class AuthService {
 
   newData() {
     return this.formsData;
+  }
+
+  isAdmin() {
+    if (localStorage.getItem('role') === 'Admin') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
