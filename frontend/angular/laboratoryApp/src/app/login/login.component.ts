@@ -42,24 +42,20 @@ export class LoginComponent implements OnInit {
 
   msg: any;
 
-  umail: any = 'harsha@com';
-  upass: any = '123';
-
   send() {
     console.log(this.loginForm.value);
 
     this.authServices.login(this.loginForm.value).subscribe((val) => {
       this.msg = val;
       console.log(this.msg);
-      if (!this.msg.error && this.msg.data.role === 'Admin') {
+
+      if (this.msg.data.role === 'Admin') {
         this.router.navigate(['/dashbord']);
       } else {
-        window.alert('imposter');
+        this.router.navigate(['/yoursample']);
       }
     });
   }
 
-  ngOnInit(): void {
-    console.log('edhooo sede');
-  }
+  ngOnInit(): void {}
 }

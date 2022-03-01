@@ -49,6 +49,15 @@ export class DashbordComponent implements OnInit {
   }
 
   data: any;
+  glucoForm = new FormGroup({
+    fastingbloodsugar: new FormControl('', Validators.required),
+
+    postprandilabloodsugar: new FormControl('', Validators.required),
+    hba1c: new FormControl('', Validators.required),
+    calcium: new FormControl('', Validators.required),
+  });
+
+  hemoData() {}
 
   sampleFormData() {
     let data: any = this.sample.value.patientName;
@@ -89,34 +98,48 @@ export class DashbordComponent implements OnInit {
   userReport: any = '';
 
   viewReport(_id: any) {
-    this.apiServices.viewOneReport(_id).subscribe((val) => {
-      this.userReport = val;
+    this.apiServices.allreports().subscribe((val) => {
       console.log(val);
-      this.userReport = val;
-      this.heomoglobinReport = this.userReport.data.haematology[0];
-      // this.glucometryReport = this.userReport.data.glucometry[0];
-      // this.thyroidReport = this.userReport.data.thyroid[0];
-
-      console.log('thy', this.glucometry);
+      this.arr = val;
+      for (const i of this.arr.data) {
+        if (_id === i._id) {
+          this.heomoglobinReport = i.haematology[0];
+        }
+      }
     });
   }
+  arr: any;
+
+  newa: any;
+
   viewReportglu(_id: any) {
-    this.apiServices.viewOneReport(_id).subscribe((val) => {
-      this.userReport = val;
+    // this.apiServices.viewOneReport(_id).subscribe((val) => {
+    //   this.userReport = val;
+    //   console.log(val);
+    //   this.userReport = val;
+
+    //   this.glucometryReport = this.userReport.data.glucometry[0];
+
+    console.log('thy', this.glucometry);
+    this.apiServices.allreports().subscribe((val) => {
       console.log(val);
-      this.userReport = val;
-
-      this.glucometryReport = this.userReport.data.glucometry[0];
-
-      console.log('thy', this.glucometry);
+      this.arr = val;
+      for (const i of this.arr.data) {
+        if (_id === i._id) {
+          this.glucometryReport = i.glucometry[0];
+        }
+      }
     });
   }
   viewReportthy(_id: any) {
-    this.apiServices.viewOneReport(_id).subscribe((val) => {
-      this.userReport = val;
+    this.apiServices.allreports().subscribe((val) => {
       console.log(val);
-      this.userReport = val;
-      this.thyroidReport = this.userReport.data.thyroid[0];
+      this.arr = val;
+      for (const i of this.arr.data) {
+        if (_id === i._id) {
+          this.thyroidReport = i.thyroid[0];
+        }
+      }
     });
   }
 
@@ -125,9 +148,9 @@ export class DashbordComponent implements OnInit {
   ngOnInit(): void {
     console.log('one', this.userReport);
 
-    if (!localStorage.getItem('token')) {
-      this.router.navigate(['/login']);
-    }
+    // if (!localStorage.getItem('token')) {
+    //   this.router.navigate(['/login']);
+    // }
 
     window.addEventListener('beforeunload', function (e) {
       var confirmationMessage = 'o/';

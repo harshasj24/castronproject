@@ -9,7 +9,7 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   constructor(public serv: AuthService, private router: Router) {}
-  flag: any = false;
+  flag: any;
 
   logout() {
     localStorage.clear();

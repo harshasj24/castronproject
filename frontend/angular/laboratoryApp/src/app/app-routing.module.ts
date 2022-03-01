@@ -9,21 +9,37 @@ import { ThyroidComponent } from './thyroid/thyroid.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LoginComponent } from './login/login.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { UserdashbordComponent } from './userdashbord/userdashbord.component';
+import { AuthgardGuard } from './guard/authgard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landingpage', pathMatch: 'full' },
   { path: 'landingpage', component: LandingpageComponent },
-  { path: 'dashbord', component: DashbordComponent },
+  {
+    path: 'dashbord',
+    component: DashbordComponent,
+    canActivate: [AuthgardGuard],
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [AuthgardGuard],
+  },
   {
     path: 'entersamples',
     component: EntersamplesComponent,
+    canActivate: [AuthgardGuard],
   },
   { path: 'entersamples/hemoglobin', component: HemoglobinComponent },
   { path: 'entersamples/glucometry', component: GlucometryComponent },
   { path: 'entersamples/thyroid', component: ThyroidComponent },
-  { path: 'userdetails', component: UserdetailsComponent },
+  {
+    path: 'userdetails',
+    component: UserdetailsComponent,
+    canActivate: [AuthgardGuard],
+  },
+  { path: 'yoursample', component: UserdashbordComponent },
 ];
 
 @NgModule({

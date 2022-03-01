@@ -26,20 +26,20 @@ export class AuthService {
   login(data: any) {
     return this.apiServices.login(data).pipe(
       tap((responce: any) => {
-        this.islogedin.next(true);
-        localStorage.setItem('token', responce.data.token);
-        if (responce.data.role === 'Admin') {
-          this.role = true;
+        if (!responce.error) {
+          localStorage.setItem('token', responce.data.token);
+          localStorage.setItem("role",responce.data.role)
+          this.islogedin.next(true);
+          this.role = responce.data.role;
         }
       })
-    );    
+    );
   }
 
   getData() {
     return this.http.get('http://jsonplaceholder.typicode.com/users');
   }
 
-  
   newData() {
     return this.formsData;
   }

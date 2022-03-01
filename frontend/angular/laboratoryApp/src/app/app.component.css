@@ -13,3 +13,9 @@
 nav {
   background-color: transparent;
 }
+
+.body {
+  overflow-x: hidden;
+}
+.logout {
+}

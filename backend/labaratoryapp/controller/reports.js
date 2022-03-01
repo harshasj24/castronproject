@@ -50,13 +50,14 @@ let viewReports = async (req, res, next) => {
 };
 
 let updateUser = async (req, res, next) => {
-  let { fName, thyroid, glucometry, hemotology } = req.body;
+  let { _id, thyroid, glucometry, hemotology } = req.body;
   try {
     await reports.updateOne(
-      { fName },
+      { _id },
       {
         glucometry,
         hemotology,
+        thyroid,
       }
     );
     res.json({
@@ -67,23 +68,8 @@ let updateUser = async (req, res, next) => {
   } catch {}
 };
 
-let getReports = async (req, res, next) => {
-  let _id = req.params._id;
-  const reportData = await reports.findOne({ _id }).lean();
-  try {
-    res.json({
-      error: false,
-      message: "data fetched ff Sucessfully",
-      data: reportData,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 module.exports = {
   addReport1,
   viewReports,
   updateUser,
-  getReports,
 };
