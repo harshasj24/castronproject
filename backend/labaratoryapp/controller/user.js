@@ -8,7 +8,7 @@ let signup = async (req, res, next) => {
   try {
     const emailexists = await usersData.findOne({ email });
     if (emailexists) {
-      res.json({
+      res.status(401).json({
         error: true,
         message: "Email already Exists",
         data: null,
@@ -25,7 +25,7 @@ let signup = async (req, res, next) => {
           role,
         },
       ]);
-      res.json({
+      res.status(200).json({
         error: false,
         message: "Data posted sucessfully",
         data: null,
@@ -47,20 +47,20 @@ let login = async (req, res, next) => {
         const token = await jwt.sign(payload, SCERET_KEY, {
           expiresIn: "8h",
         });
-        res.json({
+        res.status(200).json({
           error: false,
           message: "login Sucessfull",
           data: { _id, fName, role, token },
         });
       } else {
-        res.json({
+        res.status(401).json({
           error: true,
           message: "invalid password",
           data: null,
         });
       }
     } else {
-      res.json({
+      res.json.status(401)({
         error: true,
         message: "Email dosenot exists",
         data: null,
@@ -145,8 +145,6 @@ let updateUser = async (req, res, next) => {
     next(err);
   }
 };
-
-
 
 module.exports = {
   signup,

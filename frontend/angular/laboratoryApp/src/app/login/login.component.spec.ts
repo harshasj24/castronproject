@@ -22,4 +22,7 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Testing for Password',()=>{
+    expect(component.passText).toBe('password')
+  })
 });

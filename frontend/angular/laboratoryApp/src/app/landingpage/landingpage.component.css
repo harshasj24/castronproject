@@ -1,47 +1,28 @@
-.custom-shape-divider-bottom-1636637572 {
+.container-fluid {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("https://cdn.pixabay.com/photo/2018/11/20/16/44/laboratory-3827745_960_720.jpg");
+  height: 548px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.txt {
+  text-align: center;
   position: absolute;
-  bottom: 0;
   left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 125px;
 }
 
-.custom-shape-divider-bottom-1636637572 svg {
-  position: relative;
-  display: block;
-  width: calc(134% + 1.3px);
-  height: 98px;
+.txt h1 {
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  font-family: "Times New Roman", Times, serif;
 }
 
-.custom-shape-divider-bottom-1636637572 .shape-fill {
-  fill: white;
-}
-
-.banner {
-  background-color: #abe9cd;
-  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
-
-  height: 500px;
-}
-
-.crds {
-  display: flex;
-}
-.crd-middle {
-  margin-left: -80px;
-  z-index: 1;
-  transform: scale(1.2);
-}
-
-.crd-last {
-  margin-left: -50px;
-}
-
-.banner h1 {
-  position: absolute;
-  margin-top: 50px;
-  color: rgb(165, 70, 53);
-  margin-left: 190px;
-  font-size: 45px;
+.btn-transprant:hover {
+  border: 1px solid tomato !important;
+  border: none;
 }

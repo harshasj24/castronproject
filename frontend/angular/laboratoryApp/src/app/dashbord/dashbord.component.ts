@@ -165,7 +165,6 @@ export class DashbordComponent implements OnInit {
     });
 
     //
-   
 
     this.apiServices.usersReport().subscribe((data) => {
       this.reportsData = data;
