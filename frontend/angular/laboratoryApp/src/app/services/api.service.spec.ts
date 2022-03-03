@@ -39,7 +39,8 @@ describe('ApiService', () => {
       method: 'POST',
       url: `http://localhost:4300/labs/signup`,
     });
-
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json')
     req.flush(user);
   })
 
@@ -63,7 +64,8 @@ describe('ApiService', () => {
       method: 'POST',
       url: `http://localhost:4300/labs/login`,
     });
-
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json')
     req.flush(response);
   })
 
@@ -127,6 +129,8 @@ describe('ApiService', () => {
       method: 'GET',
       url: `http://localhost:4300/reports/viewreports`,
     })
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json')
     req.flush(response)
   })
 
