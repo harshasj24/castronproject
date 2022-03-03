@@ -1,13 +1,10 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
   OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
-import { AuthService } from '../services/auth.service';
+
 
 // import { AuthService } from '../services/auth.service';
 
@@ -17,15 +14,41 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./dashbord.component.css'],
 })
 export class DashbordComponent implements OnInit {
-  constructor(
-    private servers: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private apiServices: ApiService
-  ) {
-    // console.log(this.sample.value, 'of constructor');
+  constructor( private apiServices: ApiService) {
+    
+  }
+  ngOnInit(): void {
+    console.log('one', this.newa);
+this.getAllReports()
+   
+
+    window.addEventListener('beforeunload', function (e) {
+      var confirmationMessage = 'o/';
+      console.log('cond');
+      e.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
+      return confirmationMessage; // Gecko, WebKit, Chrome <34
+    });
+    this.getAllUserResports()
+    this.apiServices.usersReport().subscribe((rep) => {
+      this.allReports = rep;
+      this.allReports = this.allReports.data;
+      console.log(rep);
+    });
+
+    console.log('onlu once', this.sample.value);
+  }
+  getAllReports(){
+    this.apiServices.allreports().subscribe((val) => {
+      console.log(val);
+      this.arr = val;
+    });
   }
 
+  getAllUserResports(){
+    this.apiServices.usersReport().subscribe((data:any) => {
+      this.reportsData = data.data;
+    });
+  }
   sample = new FormGroup({
     patientName: new FormControl('', [Validators.required]),
     hemoglobin: new FormControl(''),
@@ -141,43 +164,17 @@ export class DashbordComponent implements OnInit {
     }
   }
   viewReportthy(_id: any) {
+    
+    
     this.uId = _id;
     for (const i of this.arr.data) {
       if (_id === i._id) {
+        console.log(i.thyroid[0]);
+        
         this.thyroidReport = i.thyroid[0];
       }
     }
   }
 
-  ngOnInit(): void {
-    console.log('one', this.newa);
-
-    this.apiServices.allreports().subscribe((val) => {
-      console.log(val);
-      this.arr = val;
-    });
-
-    window.addEventListener('beforeunload', function (e) {
-      var confirmationMessage = 'o/';
-      console.log('cond');
-      e.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
-      return confirmationMessage; // Gecko, WebKit, Chrome <34
-    });
-
-    //
-
-    this.apiServices.usersReport().subscribe((data) => {
-      this.reportsData = data;
-      this.reportsData = this.reportsData.data;
-      console.log(this.reportsData._id);
-    });
-
-    this.apiServices.usersReport().subscribe((rep) => {
-      this.allReports = rep;
-      this.allReports = this.allReports.data;
-      console.log(rep);
-    });
-
-    console.log('onlu once', this.sample.value);
-  }
+ 
 }
