@@ -17,7 +17,7 @@ let signup = async (req, res, next) => {
       const saltRounds = 10;
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(password, salt);
-      await usersData.insertMany([
+    let user =   await usersData.create([
         {
           fName,
           email,
@@ -28,7 +28,7 @@ let signup = async (req, res, next) => {
       res.status(200).json({
         error: false,
         message: "Data posted sucessfully",
-        data: null,
+        data: user,
       });
     }
   } catch (err) {

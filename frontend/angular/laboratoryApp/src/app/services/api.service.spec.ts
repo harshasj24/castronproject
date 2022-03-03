@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import { TestBed } from '@angular/core/testing';
 
 // import { ApiService } from './api.service';
@@ -43,9 +44,12 @@
 //  1 contributor
 // 133 lines (119 sloc)  3.22 KB
    
+=======
+>>>>>>> e1860398b01bdab7ac9366021635b1fc33d52183
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
+import {response} from './response'
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -63,7 +67,13 @@ describe('ApiService', () => {
     expect(service).toBeTruthy();
   });
 
+<<<<<<< HEAD
   
+=======
+  afterEach(()=>{
+    httpTestingController.verify()
+  })
+>>>>>>> e1860398b01bdab7ac9366021635b1fc33d52183
   it('it should register user',()=>{
     let user = {
       error:false,
@@ -84,7 +94,12 @@ describe('ApiService', () => {
       method: 'POST',
       url: `http://localhost:4300/labs/signup`,
     });
+<<<<<<< HEAD
 
+=======
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json')
+>>>>>>> e1860398b01bdab7ac9366021635b1fc33d52183
     req.flush(user);
   })
 
@@ -108,11 +123,17 @@ describe('ApiService', () => {
       method: 'POST',
       url: `http://localhost:4300/labs/login`,
     });
+<<<<<<< HEAD
 
+=======
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json')
+>>>>>>> e1860398b01bdab7ac9366021635b1fc33d52183
     req.flush(response);
   })
 
   it("it should get all reports",()=>{
+<<<<<<< HEAD
     let response = [
       {
         date: '112-50-50',
@@ -163,6 +184,9 @@ describe('ApiService', () => {
         ],
       },
     ];
+=======
+   
+>>>>>>> e1860398b01bdab7ac9366021635b1fc33d52183
     
     service.allreports().subscribe((res)=>{
       expect(res).toEqual(response)
@@ -172,6 +196,11 @@ describe('ApiService', () => {
       method: 'GET',
       url: `http://localhost:4300/reports/viewreports`,
     })
+<<<<<<< HEAD
+=======
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json')
+>>>>>>> e1860398b01bdab7ac9366021635b1fc33d52183
     req.flush(response)
   })
 

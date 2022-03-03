@@ -25,6 +25,11 @@ getTestBed().initTestEnvironment(
 );
 
 // Then we find all the tests.
+<<<<<<< HEAD
 const context = require.context('./', true, /api.service.spec.ts/);
+=======
+//const context = require.context('./', true, /\.spec\.ts$/);
+const context = require.context('./', true, /dashbord.component.spec.ts/);
+>>>>>>> e1860398b01bdab7ac9366021635b1fc33d52183
 // And load the modules.
 context.keys().map(context);
