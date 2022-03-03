@@ -60,7 +60,7 @@ let login = async (req, res, next) => {
         });
       }
     } else {
-      res.json.status(401)({
+      res.json({
         error: true,
         message: "Email dosenot exists",
         data: null,

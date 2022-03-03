@@ -24,6 +24,9 @@ app.use(express.json());
 
 app.use(cors());
 
+app.get("/error", (req, res) => {
+  res.status(401).send("some thing went wrong");
+});
 app.use("/labs", userRouter);
 
 app.use("/reports", reportRouter);

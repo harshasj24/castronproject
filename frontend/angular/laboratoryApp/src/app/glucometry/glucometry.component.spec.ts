@@ -8,9 +8,8 @@ describe('GlucometryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlucometryComponent ]
-    })
-    .compileComponents();
+      declarations: [GlucometryComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
