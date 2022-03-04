@@ -44,6 +44,10 @@ export class AuthService {
     return this.formsData;
   }
 
+  token() {
+    return localStorage.getItem('token');
+  }
+
   isAdmin() {
     if (localStorage.getItem('role') === 'Admin') {
       return true;

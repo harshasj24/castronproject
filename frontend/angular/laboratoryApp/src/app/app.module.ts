@@ -14,6 +14,8 @@ import { ThyroidComponent } from './thyroid/thyroid.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { UserdashbordComponent } from './userdashbord/userdashbord.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,11 @@ import { UserdashbordComponent } from './userdashbord/userdashbord.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      progressBar: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

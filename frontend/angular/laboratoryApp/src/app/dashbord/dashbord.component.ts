@@ -1,10 +1,6 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-
 
 // import { AuthService } from '../services/auth.service';
 
@@ -14,41 +10,21 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./dashbord.component.css'],
 })
 export class DashbordComponent implements OnInit {
-  constructor( private apiServices: ApiService) {
-    
-  }
-  ngOnInit(): void {
-    console.log('one', this.newa);
-this.getAllReports()
-   
+  constructor(private apiServices: ApiService) {}
 
-    window.addEventListener('beforeunload', function (e) {
-      var confirmationMessage = 'o/';
-      console.log('cond');
-      e.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
-      return confirmationMessage; // Gecko, WebKit, Chrome <34
-    });
-    this.getAllUserResports()
-    this.apiServices.usersReport().subscribe((rep) => {
-      this.allReports = rep;
-      this.allReports = this.allReports.data;
-      console.log(rep);
-    });
-
-    console.log('onlu once', this.sample.value);
-  }
-  getAllReports(){
+  getAllReports() {
     this.apiServices.allreports().subscribe((val) => {
       console.log(val);
       this.arr = val;
     });
   }
 
-  getAllUserResports(){
-    this.apiServices.usersReport().subscribe((data:any) => {
+  getAllUserResports() {
+    this.apiServices.usersReport().subscribe((data: any) => {
       this.reportsData = data.data;
     });
   }
+
   sample = new FormGroup({
     patientName: new FormControl('', [Validators.required]),
     hemoglobin: new FormControl(''),
@@ -128,6 +104,25 @@ this.getAllReports()
   reportsData: any;
 
   allReports: any;
+  allReportsCpy: any;
+  names: any;
+  flag: any = false;
+  search() {
+    console.log(this.names);
+
+    if (this.names !== '') {
+      this.allReports = this.allReports.filter((val: any) => {
+        return val.fName.includes(this.names.toLowerCase());
+      });
+    } else {
+      this.allReports = this.allReportsCpy;
+    }
+    if (this.allReports.length === 0) {
+      this.flag = true;
+    } else {
+      this.flag = false;
+    }
+  }
 
   heomoglobinReport: any = [];
   glucometryReport: any = [];
@@ -164,17 +159,34 @@ this.getAllReports()
     }
   }
   viewReportthy(_id: any) {
-    
-    
     this.uId = _id;
     for (const i of this.arr.data) {
       if (_id === i._id) {
         console.log(i.thyroid[0]);
-        
+
         this.thyroidReport = i.thyroid[0];
       }
     }
   }
 
- 
+  ngOnInit(): void {
+    console.log('one', this.newa);
+    this.getAllReports();
+
+    window.addEventListener('beforeunload', function (e) {
+      var confirmationMessage = 'o/';
+      console.log('cond');
+      e.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
+      return confirmationMessage; // Gecko, WebKit, Chrome <34
+    });
+    this.getAllUserResports();
+    this.apiServices.usersReport().subscribe((rep) => {
+      this.allReports = rep;
+      this.allReports = this.allReports.data;
+      this.allReportsCpy = [...this.allReports];
+      console.log(rep);
+    });
+
+    console.log('onlu once', this.sample.value);
+  }
 }

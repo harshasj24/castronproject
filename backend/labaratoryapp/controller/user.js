@@ -17,7 +17,7 @@ let signup = async (req, res, next) => {
       const saltRounds = 10;
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(password, salt);
-    let user =   await usersData.create([
+      let user = await usersData.create([
         {
           fName,
           email,

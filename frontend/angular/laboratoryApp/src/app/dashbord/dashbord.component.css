@@ -7,3 +7,14 @@
 .pen {
   color: red;
 }
+
+.ser {
+  border: none;
+  border-bottom: 1px solid rgb(8, 8, 20);
+  outline: none;
+}
+
+.fa-search {
+  position: absolute;
+  margin-left: -560px;
+}

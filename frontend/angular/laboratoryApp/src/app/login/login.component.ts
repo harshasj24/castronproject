@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 
@@ -10,7 +11,11 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private authServices: AuthService, private router: Router) {}
+  constructor(
+    private authServices: AuthService,
+    private router: Router,
+    private toster: ToastrService
+  ) {}
   dat: any;
 
   passText: any = 'password';
@@ -43,6 +48,10 @@ export class LoginComponent implements OnInit {
   msg: any;
   errMsg: any = '';
 
+  tost() {
+    this.toster.error('noooooo');
+  }
+
   send() {
     console.log(this.loginForm.value);
 
@@ -53,9 +62,11 @@ export class LoginComponent implements OnInit {
       console.log(this.msg);
 
       if (this.msg.data.role === 'Admin') {
+        this.toster.success(this.msg.data.fName.toUpperCase(), 'Welcome Back');
         this.router.navigate(['/dashbord']);
       } else {
         this.router.navigate(['/yoursample', this.msg.data._id]);
+        this.toster.success(this.msg.data.fName.toUpperCase(), 'Welcome Back');
       }
     });
   }
