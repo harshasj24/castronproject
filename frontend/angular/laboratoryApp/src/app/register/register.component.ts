@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -9,7 +10,11 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private apiservices: ApiService, private router: Router) {}
+  constructor(
+    private apiservices: ApiService,
+    private router: Router,
+    private toster: ToastrService
+  ) {}
   regForm = new FormGroup({
     fName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
@@ -34,7 +39,8 @@ export class RegisterComponent implements OnInit {
       this.sataus = val;
 
       if (!this.sataus.error) {
-        window.confirm('register addesucess fully');
+        this.toster.success('register addesucess fully');
+        // window.confirm('register addesucess fully');
         this.router.navigate(['/userdetails']);
       } else {
         window.alert(this.sataus.message);
