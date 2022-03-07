@@ -16,6 +16,7 @@ import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { UserdashbordComponent } from './userdashbord/userdashbord.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       progressBar: true,
     }),
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthorizationInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

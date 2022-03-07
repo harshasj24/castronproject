@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   send() {
     console.log(this.loginForm.value);
 
-    this.authServices.login(this.loginForm.value).subscribe((val) => {
+    this.authServices.login(this.loginForm.value).subscribe((val:any) => {
       this.msg = val;
       this.errMsg = val;
 
@@ -68,6 +68,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/yoursample', this.msg.data._id]);
         this.toster.success(this.msg.data.fName.toUpperCase(), 'Welcome Back');
       }
+    },(err:any)=>{
+      this.errMsg=err.error
+      console.log(err.error);
+      
     });
   }
 

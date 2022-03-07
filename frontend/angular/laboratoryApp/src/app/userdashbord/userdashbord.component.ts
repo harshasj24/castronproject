@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./userdashbord.component.css'],
 })
 export class UserdashbordComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private apiServices: ApiService) {}
+  constructor(private route: ActivatedRoute, private apiServices: ApiService, private router:Router) {}
 
   allReports: any;
 
@@ -115,8 +115,13 @@ export class UserdashbordComponent implements OnInit {
     let _id = this.route.snapshot.params._id;
     console.log('hello lkb', _id);
 
-    this.apiServices.userReports(_id).subscribe((val) => {
-      console.log(val);
+    this.apiServices.userReports(_id).subscribe((val:any) => {
+      console.log(val)
+      if (val.error) {
+        window.alert(val.message)
+        this.router.navigate(["/login"])
+        
+      }else{
 
       this.allReports = val;
       this.allReports = [this.allReports.data];
@@ -129,6 +134,8 @@ export class UserdashbordComponent implements OnInit {
       if (this.allReports[0].thyroid[0]) {
         this.thyroidReport = this.allReports[0].thyroid[0];
       }
+    }
     });
+
   }
 }

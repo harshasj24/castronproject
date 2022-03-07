@@ -43,7 +43,7 @@ let login = async (req, res, next) => {
       let { _id, fName, role, email } = dataUser;
       let passmatch = await bcrypt.compare(password, dataUser.password);
       if (passmatch) {
-        const payload = { fName, role };
+        const payload = { _id, role };
         const token = await jwt.sign(payload, SCERET_KEY, {
           expiresIn: "8h",
         });
@@ -153,4 +153,5 @@ module.exports = {
 
   getOneUser,
   updateUser,
+ 
 };

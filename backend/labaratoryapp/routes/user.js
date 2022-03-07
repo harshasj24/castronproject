@@ -2,14 +2,16 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controller/user");
 
-router.get("/alldata", userController.allUserDetails);
+const auth=require("../middlewares/auth")
 
-router.post("/signup", userController.signup);
+router.get("/alldata",auth.authorizedAdmin, userController.allUserDetails);
+
+router.post("/signup",auth.authorizedAdmin, userController.signup);
 
 router.post("/login", userController.login);
 
 router.get("/oneUserdetails/:email", userController.getOneUser);
 
-router.put("/updateuser", userController.updateUser);
+router.put("/updateuser",auth.authorizedAdmin, userController.updateUser);
 
 module.exports = router;

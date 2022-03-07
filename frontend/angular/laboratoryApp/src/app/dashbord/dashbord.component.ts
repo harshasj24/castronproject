@@ -176,13 +176,14 @@ export class DashbordComponent implements OnInit {
     window.addEventListener('beforeunload', function (e) {
       var confirmationMessage = 'o/';
       console.log('cond');
-      e.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
-      return confirmationMessage; // Gecko, WebKit, Chrome <34
+      e.returnValue = confirmationMessage; 
+      return confirmationMessage; 
+    
     });
     this.getAllUserResports();
-    this.apiServices.usersReport().subscribe((rep) => {
-      this.allReports = rep;
-      this.allReports = this.allReports.data;
+    this.apiServices.usersReport().subscribe((rep:any) => {
+      this.allReports = rep.data;
+      // this.allReports = this.allReports.data;
       this.allReportsCpy = [...this.allReports];
       console.log(rep);
     });

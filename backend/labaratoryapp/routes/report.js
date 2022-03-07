@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 const reports = require("../controller/reports");
 
-router.post("/addreports", reports.addReport1);
+const auth=require("../middlewares/auth")
 
-router.get("/viewreports", reports.viewReports);
+router.post("/addreports",auth.authorizedAdmin, reports.addReport1);
 
-router.put("/updaterep", reports.updateUser);
+router.get("/viewreports",auth.authorizedAdmin, reports.viewReports);
 
-router.get("/userSamples/:_id", reports.getOneUser);
+router.put("/updaterep", auth.authorizedAdmin,reports.updateUser);
+
+router.get("/userSamples/:_id",auth.userAuthorization, reports.getOneUser);
 
 module.exports = router;

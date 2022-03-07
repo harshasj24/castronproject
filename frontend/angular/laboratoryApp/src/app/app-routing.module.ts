@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { UserdashbordComponent } from './userdashbord/userdashbord.component';
 import { AuthgardGuard } from './guard/authgard.guard';
+import { UserGuard } from './guard/user.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landingpage', pathMatch: 'full' },
@@ -39,7 +40,7 @@ const routes: Routes = [
     component: UserdetailsComponent,
     canActivate: [AuthgardGuard],
   },
-  { path: 'yoursample/:_id', component: UserdashbordComponent },
+  { path: 'yoursample/:_id', component: UserdashbordComponent,canActivate:[UserGuard] },
 ];
 
 @NgModule({

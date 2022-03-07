@@ -12,6 +12,10 @@ export class AppComponent implements OnInit {
   flag: any;
 
   logout() {
+    // var url=window.location.href
+    // window.history.go(-window.history.length);
+    // window.location.href=url
+
     localStorage.clear();
   }
 
