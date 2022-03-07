@@ -12,6 +12,8 @@ import { ApiService } from '../services/api.service';
 export class DashbordComponent implements OnInit {
   constructor(private apiServices: ApiService) {}
 
+  flag1:boolean=true
+
   getAllReports() {
     this.apiServices.allreports().subscribe((val) => {
       console.log(val);

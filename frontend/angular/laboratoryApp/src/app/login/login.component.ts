@@ -26,14 +26,14 @@ export class LoginComponent implements OnInit {
     check: new FormControl(''),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern('[A-Za-z0-9]+$'),
+      
     ]),
   });
   get email() {
     return this.loginForm.get('mail');
   }
   get password() {
-    return this.loginForm.get('pass');
+    return this.loginForm.get('password');
   }
   togglePass() {
     if (this.passText === 'password') {

@@ -61,3 +61,9 @@ form {
 .container-fluid {
   margin-top: 126px !important;
 }
+
+.fa-user,.fa-lock{
+  position: absolute;
+  margin-top: -27px;
+  margin-left: -20px;
+}

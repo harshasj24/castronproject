@@ -4,7 +4,7 @@
       <img
         class="mt-5"
         src="../../assets/undraw_medicine_b-1-ol.svg"
-        width="400px"
+        width="480px"
         alt=""
       />
     </div>
@@ -14,8 +14,8 @@
       <form [formGroup]="loginForm" (ngSubmit)="send()" class="">
         <!-- <h4 class="text-center">Please Login!</h4> -->
         <div class="alert alert-danger" *ngIf="errMsg.error" role="alert">
-          <i class="fa fa-hexagon-exclamation"></i>
-          {{ errMsg.message | titlecase }}
+          <i class="fa fa-exclamation-triangle  mr-2"  aria-hidden="true"></i>
+        {{ errMsg.message | titlecase }}
         </div>
         <div class="form-group mt-3">
           <input
@@ -27,7 +27,7 @@
             placeholder="Email address"
             autofocus
           />
-          <span><i class="fa fa-contact"></i></span>
+          <span><i class="fa fa-user"></i></span>
           <span *ngIf="email?.invalid && email?.touched" style="color: red"
             >*Invalid Email Id!</span
           >
@@ -40,9 +40,10 @@
             formControlName="password"
             placeholder="Password"
           />
+          <span><i class="fa fa-lock"></i></span>
 
-          <span (click)="togglePass()" class="eyeIcon"
-            ><i [class]="eyes"></i
+          <span *ngIf="password?.valid" (click)="togglePass()" class="eyeIcon"
+            ><i  [class]="eyes"></i
           ></span>
         </div>
 
@@ -58,11 +59,14 @@
       <p class="mt-5">
         Connect us with
         <span>
-          <a class="ml-3 fb" href=""><i class="fa fa-facebook"></i> </a
+          <a class="ml-3 fb" target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i> </a
         ></span>
 
-        <a class="ml-3 tw" href=""><i class="fa fa-twitter"></i></a>
-        <a class="ml-3 gle" href=""> <i class="fa fa-google"> </i></a>
+        <a class="ml-3 tw"  target="blank"  href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+        <a class="ml-3 gle"  target="blank"  href="https://google.com"> <i class="fa fa-google"> </i></a>
+   
+
+    
       </p>
     </div>
   </div>
