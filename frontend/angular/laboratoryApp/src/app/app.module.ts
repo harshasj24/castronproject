@@ -8,15 +8,14 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EntersamplesComponent } from './entersamples/entersamples.component';
-import { HemoglobinComponent } from './hemoglobin/hemoglobin.component';
-import { GlucometryComponent } from './glucometry/glucometry.component';
-import { ThyroidComponent } from './thyroid/thyroid.component';
+
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { UserdashbordComponent } from './userdashbord/userdashbord.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
+import { LoadersComponent } from './loaders/loaders.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +24,10 @@ import { AuthorizationInterceptor } from './interceptors/authorization.intercept
     LoginComponent,
     RegisterComponent,
     EntersamplesComponent,
-    HemoglobinComponent,
-    GlucometryComponent,
-    ThyroidComponent,
     LandingpageComponent,
     UserdetailsComponent,
     UserdashbordComponent,
+    LoadersComponent,
   ],
   imports: [
     BrowserModule,

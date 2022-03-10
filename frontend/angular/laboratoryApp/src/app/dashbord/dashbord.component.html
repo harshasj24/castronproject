@@ -1,4 +1,13 @@
+
+
+
+
+
+
 <div class="container">
+  <div  *ngIf="isLoadders"> 
+    <app-loaders></app-loaders>
+  </div>
   <input
     type=""
     placeholder="  Search"
@@ -22,49 +31,49 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let r of allReports">
-        <td>{{ r.date }}</td>
-        <td>{{ r.fName }}</td>
-        <td>{{ r.email }}</td>
-        <td>{{ r.sampleId }}</td>
+      <tr *ngFor="let report of allReports">
+        <td>{{ report.date }}</td>
+        <td>{{ report.fName }}</td>
+        <td>{{ report.email }}</td>
+        <td>{{ report.sampleId }}</td>
         <td>
-          <Button *ngIf="r.haematology.length === 0" class="btn btn-light"
+          <Button *ngIf="report.haematology.length === 0" class="btn btn-light"
             >NA</Button
           >
 
           <Button
             data-toggle="modal"
-            (click)="viewReport(r._id)"
+            (click)="viewReport(report._id)"
             data-target="#exampleModal12"
-            *ngIf="r.haematology.length !== 0"
+            *ngIf="report.haematology.length !== 0"
             class="btn btn-success"
             >View Details</Button
           >
         </td>
         <td>
-          <Button *ngIf="r.glucometry.length === 0" class="btn btn-light"
+          <Button *ngIf="report.glucometry.length === 0" class="btn btn-light"
             >NA</Button
           >
 
           <Button
             data-toggle="modal"
-            (click)="viewReportglu(r._id)"
+            (click)="viewReportglu(report._id)"
             data-target="#exampleModal13"
-            *ngIf="r.glucometry.length != 0"
+            *ngIf="report.glucometry.length != 0"
             class="btn btn-success"
             >View Details</Button
           >
         </td>
         <td>
-          <Button *ngIf="r.thyroid.length === 0" class="btn btn-light"
+          <Button *ngIf="report.thyroid.length === 0" class="btn btn-light"
             >NA</Button
           >
 
           <Button
             data-toggle="modal"
-            (click)="viewReportthy(r._id)"
+            (click)="viewReportthy(report._id)"
             data-target="#exampleModal14"
-            *ngIf="r.thyroid.length != 0"
+            *ngIf="report.thyroid.length != 0"
             class="btn btn-success"
             >View Details</Button
           >
@@ -437,7 +446,9 @@
                       aria-describedby="emailHelp"
                       placeholder="TRI IODD Thyronine-T3 Total"
                       formControlName="t3Total"
+                   
                       [(ngModel)]="thyroidReport.t3Total"
+                      
                     />
                   </div>
                 </td>
@@ -489,3 +500,6 @@
 </div>
 
 <!-- ------------------------------------------------------------------------------ -->
+
+
+

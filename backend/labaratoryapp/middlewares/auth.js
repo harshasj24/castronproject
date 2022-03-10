@@ -33,12 +33,12 @@ const authorizedAdmin= async (req,res,next)=>{
 }
 
 const userAuthorization=async (req,res,next)=>{
-    const id=req.params._id
+    const id=req.params.email
     if (req.headers["authorization"]) {
        
         const token= await req.headers.authorization.split(" ")[1]
         const payload= await jwt.verify(token,SCERET_KEY)
-        if (payload.role==="user"&& payload._id===id) {
+        if (payload.role==="user"&& payload.email===id) {
             next()
             
         }else{

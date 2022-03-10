@@ -10,6 +10,6 @@ router.get("/viewreports",auth.authorizedAdmin, reports.viewReports);
 
 router.put("/updaterep", auth.authorizedAdmin,reports.updateUser);
 
-router.get("/userSamples/:_id",auth.userAuthorization, reports.getOneUser);
+router.get("/userSamples/:email",auth.userAuthorization, reports.getOneUser);
 
 module.exports = router;

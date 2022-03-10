@@ -69,13 +69,17 @@ let updateUser = async (req, res, next) => {
 };
 
 let getOneUser = async (req, res, next) => {
-  let _id = req.params._id;
   try {
+    let memail = req.params.email;
+   
+   
     const myEmail = await usersData
-      .findOne({ _id }, { email: 1, _id: 0 })
+      .findOne({ email:memail }, { email: 1, _id: 0 })
       .lean();
+      
     let { email } = myEmail;
-    const report = await reports.findOne({ email }).lean();
+    const report = await reports.find({ email:email }).lean();
+   
     res.json({
       error: false,
       message: "Scuessfully fetched data",

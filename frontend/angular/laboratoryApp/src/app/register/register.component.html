@@ -22,6 +22,7 @@
   <div class="form-group mt-4">
     <input
       [type]="passText"
+     
       placeholder="Enter Your Password *"
       class="form-control"
       id="exampleInputPassword1"
@@ -29,7 +30,14 @@
     />
     <span (click)="togglePass()" class="eyeIcon"><i [class]="eyes"></i></span>
   </div>
-  <input
+  <div class="form-group mt-4">
+   <select formControlName="role"    class="form-control"  id="">
+     <option selected disabled value="">Role</option>
+     <option value="Admin">Admin</option>
+     <option value="user">user</option>
+   </select>
+  </div>
+  <!-- <input
     type="text"
     class="form-control"
     formControlName="role"
@@ -39,7 +47,7 @@
   <datalist id="list">
     <option value="Admin"></option>
     <option value="user"></option>
-  </datalist>
+  </datalist> -->
   <button
     [disabled]="regForm?.invalid"
     type="submit"

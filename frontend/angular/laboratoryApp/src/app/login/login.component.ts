@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         this.toster.success(this.msg.data.fName.toUpperCase(), 'Welcome Back');
         this.router.navigate(['/dashbord']);
       } else {
-        this.router.navigate(['/yoursample', this.msg.data._id]);
+        this.router.navigate(['/yoursample', this.msg.data.email]);
         this.toster.success(this.msg.data.fName.toUpperCase(), 'Welcome Back');
       }
     },(err:any)=>{

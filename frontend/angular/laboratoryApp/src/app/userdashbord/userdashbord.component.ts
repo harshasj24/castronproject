@@ -12,6 +12,7 @@ export class UserdashbordComponent implements OnInit {
   constructor(private route: ActivatedRoute, private apiServices: ApiService, private router:Router) {}
 
   allReports: any;
+  isLoadders:boolean=true
 
   hemoForm = new FormGroup({
     hemoglobin: new FormControl('', Validators.required),
@@ -81,59 +82,54 @@ export class UserdashbordComponent implements OnInit {
   userReport: any = '';
 
   viewReport(_id: any) {
-    // this.uId = _id;
-    // for (const i of this.allReports.data) {
-    //   if (_id === i._id) {
-    //     this.heomoglobinReport = i.haematology[0];
-    //   }
-    // }
+    this.uId = _id;
+    for (const i of this.allReports) {
+      if (_id === i._id) {
+        this.heomoglobinReport = i.haematology[0];
+      }
+    }
   }
   arr: any;
   viewReportglu(_id: any) {
-    // this.uId = _id;
-    // // this.apiServices.viewOneReport(_id).subscribe((val) => {
-    // //   this.userReport = val;
-    // //   console.log(val);
-    // //   this.userReport = val;
-    // //   this.glucometryReport = this.userReport.data.glucometry[0];
-    // for (const i of this.allReports.data) {
-    //   if (_id === i._id) {
-    //     this.glucometryReport = i.glucometry[0];
-    //   }
-    // }
+    this.uId = _id;
+    // this.apiServices.viewOneReport(_id).subscribe((val) => {
+    //   this.userReport = val;
+    //   console.log(val);
+    //   this.userReport = val;
+    //   this.glucometryReport = this.userReport.data.glucometry[0];
+    for (const i of this.allReports) {
+      if (_id === i._id) {
+        this.glucometryReport = i.glucometry[0];
+      }
+    }
   }
   viewReportthy(_id: any) {
-    // this.uId = _id;
-    // for (const i of this.allReports.data) {
-    //   if (_id === i._id) {
-    //     this.thyroidReport = i.thyroid[0];
-    //   }
-    // }
+    this.uId = _id;
+    for (const i of this.allReports) {
+      if (_id === i._id) {
+        this.thyroidReport = i.thyroid[0];
+      }
+    }
   }
 
   ngOnInit(): void {
-    let _id = this.route.snapshot.params._id;
-    console.log('hello lkb', _id);
+    let email = this.route.snapshot.params.email;
+    console.log('hello lkb', this.route.snapshot.params);
 
-    this.apiServices.userReports(_id).subscribe((val:any) => {
+    this.apiServices.userReports(email).subscribe((val:any) => {
       console.log(val)
+      this.isLoadders=false
       if (val.error) {
         window.alert(val.message)
         this.router.navigate(["/login"])
         
       }else{
 
-      this.allReports = val;
-      this.allReports = [this.allReports.data];
-      if (this.allReports[0].glucometry[0]) {
-        this.glucometryReport = this.allReports[0].glucometry[0];
-      }
-      if (this.allReports[0].haematology[0]) {
-        this.heomoglobinReport = this.allReports[0].haematology[0];
-      }
-      if (this.allReports[0].thyroid[0]) {
-        this.thyroidReport = this.allReports[0].thyroid[0];
-      }
+      this.allReports = val.data;
+      console.log(this.allReports);
+      
+     
+     
     }
     });
 

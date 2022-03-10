@@ -10,9 +10,10 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./dashbord.component.css'],
 })
 export class DashbordComponent implements OnInit {
-  constructor(private apiServices: ApiService) {}
+  constructor(private apiServices: ApiService) { }
 
-  flag1:boolean=true
+  flag1: boolean = true
+  isLoadders: boolean = true
 
   getAllReports() {
     this.apiServices.allreports().subscribe((val) => {
@@ -82,7 +83,7 @@ export class DashbordComponent implements OnInit {
   glucoData() {
     this.apiServices
       .editReport({ _id: this.uId, glucometry: this.glucoForm.value })
-      .subscribe((val) => {});
+      .subscribe((val) => { });
   }
 
   hemoData() {
@@ -101,7 +102,7 @@ export class DashbordComponent implements OnInit {
         console.log(val);
       });
   }
-  sampleFormData() {}
+  sampleFormData() { }
 
   reportsData: any;
 
@@ -112,7 +113,7 @@ export class DashbordComponent implements OnInit {
   search() {
     console.log(this.names);
 
-    if (this.names !== '') {
+    if (this.names) {
       this.allReports = this.allReports.filter((val: any) => {
         return val.fName.includes(this.names.toLowerCase());
       });
@@ -130,7 +131,7 @@ export class DashbordComponent implements OnInit {
   glucometryReport: any = [];
   thyroidReport: any = [];
 
-  hemo() {}
+  hemo() { }
 
   userReport: any = '';
 
@@ -144,13 +145,6 @@ export class DashbordComponent implements OnInit {
   }
   arr: any;
   viewReportglu(_id: any) {
-    this.uId = _id;
-    // this.apiServices.viewOneReport(_id).subscribe((val) => {
-    //   this.userReport = val;
-    //   console.log(val);
-    //   this.userReport = val;
-
-    //   this.glucometryReport = this.userReport.data.glucometry[0];
 
     console.log('thy', this.glucometry);
 
@@ -178,12 +172,13 @@ export class DashbordComponent implements OnInit {
     window.addEventListener('beforeunload', function (e) {
       var confirmationMessage = 'o/';
       console.log('cond');
-      e.returnValue = confirmationMessage; 
-      return confirmationMessage; 
-    
+      e.returnValue = confirmationMessage;
+      return confirmationMessage;
+
     });
     this.getAllUserResports();
-    this.apiServices.usersReport().subscribe((rep:any) => {
+    this.apiServices.usersReport().subscribe((rep: any) => {
+      this.isLoadders = false
       this.allReports = rep.data;
       // this.allReports = this.allReports.data;
       this.allReportsCpy = [...this.allReports];

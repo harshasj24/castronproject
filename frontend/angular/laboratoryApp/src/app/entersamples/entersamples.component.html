@@ -1,13 +1,13 @@
-<form [formGroup]="sample" (ngSubmit)="sampleFormData()" class="mx-auto mt-5">
+<form [formGroup]="sample" (ngSubmit)="sampleFormData()" class="mx-auto mt-5 main">
   <h4 class="text-center">Create Test</h4>
-  <div class="form-group mx-auto w-50">
+  <div class="form-group mx-auto w-25">
     <select formControlName="patientName" class="form-control" name="" id="">
       <option value="" selected disabled>Patient Name</option>
       <option [value]="n._id" *ngFor="let n of names">{{ n.fName }}</option>
     </select>
   </div>
 
-  <div class="form-group form-check ml-5 w-75 mx-auto">
+  <div class="form-group form-check ml-5 w-50 mx-auto">
     <input
       formControlName="hemoglobin"
       type="checkbox"
@@ -145,7 +145,7 @@
       </form>
     </div>
   </div>
-  <div class="form-group form-check ml-5 w-75 mx-auto">
+  <div class="form-group form-check ml-5 w-50 mx-auto">
     <input
       formControlName="glucometry"
       type="checkbox"
@@ -211,7 +211,7 @@
     </form>
   </div>
 
-  <div class="form-group form-check ml-5 w-75 mx-auto">
+  <div class="form-group form-check ml-5 w-50 mx-auto">
     <input
       formControlName="thyroid"
       type="checkbox"

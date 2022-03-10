@@ -39,15 +39,15 @@ export class ApiService {
     return this.http.post('http://localhost:4300/reports/addreports', data);
   }
 
-  viewOneReport(_id: any) {
-    return this.http.get(`http://localhost:4300/reports/viewreport/${_id}`);
+  viewOneReport(email: any) {
+    return this.http.get(`http://localhost:4300/reports/viewreport/${email}`);
   }
 
   editReport(data: any) {
     return this.http.put('http://localhost:4300/reports/updaterep', data);
   }
 
-  userReports(_id:any) {
-    return this.http.get(`http://localhost:4300/reports/userSamples/${_id}`);
+  userReports(email:any) {
+    return this.http.get(`http://localhost:4300/reports/userSamples/${email}`);
   }
 }

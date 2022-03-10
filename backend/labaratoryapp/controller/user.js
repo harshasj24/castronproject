@@ -43,14 +43,14 @@ let login = async (req, res, next) => {
       let { _id, fName, role, email } = dataUser;
       let passmatch = await bcrypt.compare(password, dataUser.password);
       if (passmatch) {
-        const payload = { _id, role };
+        const payload = { email, role };
         const token = await jwt.sign(payload, SCERET_KEY, {
           expiresIn: "8h",
         });
         res.status(200).json({
           error: false,
           message: "login Sucessfull",
-          data: { _id, fName, role, token },
+          data: { email, fName, role, token },
         });
       } else {
         res.status(401).json({

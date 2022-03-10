@@ -1,5 +1,16 @@
+
+
+
+
+
+
 <div class="container">
-  <table class="table ">
+  <div  *ngIf="isLoadders"> 
+    <app-loaders></app-loaders>
+  </div>
+
+
+  <table class="table mt-4">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Sample Date</th>
@@ -7,8 +18,8 @@
         <th scope="col">Email ID</th>
         <th scope="col">Sample ID</th>
         <th scope="col">Haemotology</th>
+        <th scope="col">Glucometry</th>
         <th scope="col">Thyriod Profile</th>
-        <th scope="col">Glucometry </th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +32,7 @@
           <Button *ngIf="r.haematology.length === 0" class="btn btn-light"
             >NA</Button
           >
-  
+
           <Button
             data-toggle="modal"
             (click)="viewReport(r._id)"
@@ -35,7 +46,7 @@
           <Button *ngIf="r.glucometry.length === 0" class="btn btn-light"
             >NA</Button
           >
-  
+
           <Button
             data-toggle="modal"
             (click)="viewReportglu(r._id)"
@@ -46,8 +57,10 @@
           >
         </td>
         <td>
-          <Button *ngIf="r.thyroid.length === 0" class="btn btn-light">NA</Button>
-  
+          <Button *ngIf="r.thyroid.length === 0" class="btn btn-light"
+            >NA</Button
+          >
+
           <Button
             data-toggle="modal"
             (click)="viewReportthy(r._id)"
@@ -60,7 +73,9 @@
       </tr>
     </tbody>
   </table>
-  
+
+  <!-- hemotology starts -->
+
   <div
     class="modal fade"
     id="exampleModal12"
@@ -71,7 +86,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Test Results</h5>
           <button
             type="button"
             class="close"
@@ -83,178 +98,218 @@
         </div>
         <div class="modal-body">
           <div>
-            <form [formGroup]="hemoForm" (ngSubmit)="hemoData()" class="mx-auto">
+            <form
+              [formGroup]="hemoForm"
+              (ngSubmit)="hemoData()"
+              class="mx-auto"
+            >
               <h4 class="text-center">Hemoglobin Report</h4>
-              <div class="row mt-3">
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="hemoglobin"
-                      [(ngModel)]="heomoglobinReport.hemoglobin"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="totalCount"
-                      [(ngModel)]="heomoglobinReport.totalCount"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="neutrophils"
-                      [(ngModel)]="heomoglobinReport.neutrophils"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="lymphocytes"
-                      [(ngModel)]="heomoglobinReport.lymphocytes"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="eosinophiles"
-                      [(ngModel)]="heomoglobinReport.eosinophiles"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="basophills"
-                      [(ngModel)]="heomoglobinReport.basophills"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="monocytes"
-                      [(ngModel)]="heomoglobinReport.monocytes"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="redBloodCells"
-                      [(ngModel)]="heomoglobinReport.redBloodCells"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="pavkedCellVolume"
-                      [(ngModel)]="heomoglobinReport.pavkedCellVolume"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      formControlName="mvc"
-                      [(ngModel)]="heomoglobinReport.mvc"
-                    />
-                  </div>
-                </div>
-              </div>
-  
-              <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+              <table class="table rep rep">
+                <thead>
+                  <tr>
+                    <th scope="col">Test Name</th>
+                    <th scope="col">Results</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Heamoglobin</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="hemoglobin"
+                          [(ngModel)]="heomoglobinReport.hemoglobin"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Total Count (WBC)</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="totalCount"
+                          [(ngModel)]="heomoglobinReport.totalCount"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Neutrophills</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="neutrophils"
+                          [(ngModel)]="heomoglobinReport.neutrophils"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Lymphocytes</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="lymphocytes"
+                          [(ngModel)]="heomoglobinReport.lymphocytes"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Eosinophiles</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="eosinophiles"
+                          [(ngModel)]="heomoglobinReport.eosinophiles"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Basphils</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="basophills"
+                          [(ngModel)]="heomoglobinReport.basophills"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Larry</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="monocytes"
+                          [(ngModel)]="heomoglobinReport.monocytes"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Red Blood Clls (RBC)</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="redBloodCells"
+                          [(ngModel)]="heomoglobinReport.redBloodCells"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Packed Cell Volume (PVC)</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="pavkedCellVolume"
+                          [(ngModel)]="heomoglobinReport.pavkedCellVolume"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Mean Corpuscular Volume (MCV)</td>
+                    <td>
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          formControlName="mvc"
+                          [(ngModel)]="heomoglobinReport.mvc"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
             </form>
           </div>
-  
-          <!-- hemoglobin add -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- hemotology ends -->
-  
-  <!-- glucometry model starts -->
-  
-  <div
-    class="modal fade"
-    id="exampleModal13"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div>
-            <!-- body -->
-            <form [formGroup]="glucoForm" (ngSubmit)="glucoData()" class="">
-              <h4 class="text-center">Glucometry Report</h4>
-              <div class="row mt-3">
-                <div class="col-6">
+</div>
+
+<!-- Glucometry modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal13"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Test Results</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="glucoForm" (ngSubmit)="glucoData()" class="">
+          <h4 class="text-center">Glucometry Report</h4>
+          <table class="table rep">
+            <thead>
+              <tr>
+                <th scope="col">Test Name</th>
+                <th scope="col">Results</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fasting Blood Sugar</td>
+                <td>
                   <div class="form-group">
                     <input
                       type="email"
@@ -264,10 +319,15 @@
                       placeholder="Fasting Blood Sugar"
                       formControlName="fastingbloodsugar"
                       [(ngModel)]="glucometryReport.fastingbloodsugar"
+                   
+              
                     />
                   </div>
-                </div>
-                <div class="col-6">
+                </td>
+              </tr>
+              <tr>
+                <td>Post Prandial Blood Sugar</td>
+                <td>
                   <div class="form-group">
                     <input
                       type="email"
@@ -279,8 +339,11 @@
                       [(ngModel)]="glucometryReport.postprandilabloodsugar"
                     />
                   </div>
-                </div>
-                <div class="col-6">
+                </td>
+              </tr>
+              <tr>
+                <td>Glycosylated Hamoglobin (HbA1C)</td>
+                <td>
                   <div class="form-group">
                     <input
                       type="email"
@@ -292,8 +355,11 @@
                       [(ngModel)]="glucometryReport.hba1c"
                     />
                   </div>
-                </div>
-                <div class="col-6">
+                </td>
+              </tr>
+              <tr>
+                <td>Calcium</td>
+                <td>
                   <div class="form-group">
                     <input
                       type="email"
@@ -305,50 +371,57 @@
                       [(ngModel)]="glucometryReport.calcium"
                     />
                   </div>
-                </div>
-              </div>
-            </form>
-          </div>
-  
-          <!-- hemoglobin add -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-        </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </form>
       </div>
     </div>
   </div>
-  <!-- glucometry model ends -->
-  
-  <div
-    class="modal fade"
-    id="exampleModal14"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div>
-            <!-- body -->
-            <form [formGroup]="thyForm" (ngSubmit)="thyData()" class="mx-auto">
-              <h4 class="text-center">Thyroid Report</h4>
-              <div class="row mt-3">
-                <div class="col-6">
+</div>
+
+<!-- ---------------------------THYROID----------------------------------------------- -->
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal14"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Test Results</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4 class="text-center">Thyroid Report</h4>
+        <form [formGroup]="thyForm" (ngSubmit)="thyData()" class="mx-auto">
+          <table class="table rep">
+            <thead>
+              <tr>
+               
+                <th scope="col">Test Name</th>
+                <th scope="col">Results</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              
+                <td>TRI IODD Thyronine-T3 Total</td>
+                <td>
                   <div class="form-group">
                     <input
                       type="email"
@@ -357,11 +430,17 @@
                       aria-describedby="emailHelp"
                       placeholder="TRI IODD Thyronine-T3 Total"
                       formControlName="t3Total"
+                   
                       [(ngModel)]="thyroidReport.t3Total"
+                      
                     />
                   </div>
-                </div>
-                <div class="col-6">
+                </td>
+              </tr>
+              <tr>
+             
+                <td>Thyroxine-T4</td>
+                <td>
                   <div class="form-group">
                     <input
                       type="email"
@@ -373,8 +452,12 @@
                       [(ngModel)]="thyroidReport.thyroxine"
                     />
                   </div>
-                </div>
-                <div class="col-6">
+                </td>
+              </tr>
+              <tr>
+             
+                <td>Thyroid Stimulating Harmone (TSH)</td>
+                <td>
                   <div class="form-group">
                     <input
                       type="email"
@@ -386,20 +469,18 @@
                       formControlName="tsh"
                     />
                   </div>
-                </div>
-              </div>
-            </form>
-  
-            <!-- hemoglobin add -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              Close
-            </button>
-          </div>
-        </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </form>
       </div>
     </div>
   </div>
-  
 </div>
+
+<!-- ------------------------------------------------------------------------------ -->
+
+
+

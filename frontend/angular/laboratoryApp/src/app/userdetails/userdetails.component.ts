@@ -10,7 +10,7 @@ import { ApiService } from '../services/api.service';
 })
 export class UserdetailsComponent implements OnInit {
   constructor(private apiServices: ApiService, private route: ActivatedRoute) {}
-
+  isLoadders:boolean=true
   regForm = new FormGroup({
     fName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
@@ -44,6 +44,7 @@ export class UserdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.apiServices.userDetails().subscribe((val) => {
       console.log(val);
+      this.isLoadders=false
 
       this.userDetails = val;
     });
