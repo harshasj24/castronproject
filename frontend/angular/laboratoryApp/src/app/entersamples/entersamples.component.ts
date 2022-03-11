@@ -69,8 +69,7 @@ export class EntersamplesComponent implements OnInit, AfterViewInit {
   sampleFormData() {
     console.log(this.hemoForm.value);
     console.log(this.patientName?.value);
-    let date = new Date();
-    let sampleDate = `${date.getMonth()} ${date.getDay()},${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    
     let sId = Math.floor(Math.random() * 100);
 
     let hemo: any = [];
@@ -90,7 +89,7 @@ export class EntersamplesComponent implements OnInit, AfterViewInit {
 
     let mydata = {
       _id: this.patientName?.value,
-      date: sampleDate,
+    
       sampleId: sId,
       haematology: hemo,
       glucometry: gluR,

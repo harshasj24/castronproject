@@ -12,7 +12,7 @@
     <div class="col-lg-5 col-md-12 ">
       <h1>Login</h1>
       <form [formGroup]="loginForm" (ngSubmit)="send()" class="">
-        <!-- <h4 class="text-center">Please Login!</h4> -->
+       
         <div class="alert alert-danger" *ngIf="errMsg.error" role="alert">
           <i class="fa fa-exclamation-triangle  mr-2"  aria-hidden="true"></i>
         {{ errMsg.message | titlecase }}

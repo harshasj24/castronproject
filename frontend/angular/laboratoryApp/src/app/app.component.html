@@ -1,4 +1,4 @@
-<nav *ngIf="serv.islogin | async" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav *ngIf="serv.token()" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#">Laboratory</a>
   <button
     class="navbar-toggler"
@@ -23,11 +23,7 @@
           >logout <i class="fa fa-right-from-bracket"></i>
         </a>
       </li>
-      <!-- <li class="nav-item active">
-        <a class="nav-link" routerLink="!serv.islogin" *ngIf="flag" href=""
-          >Login <span class="sr-only">(current)</span></a
-        >
-      </li> -->
+    
       <li *ngIf="serv.isAdmin()" class="nav-item logout dropdown text-lg">
         <a
           class="btn btn-dark text-light nav-link dropdown-toggle"
@@ -75,7 +71,7 @@
           <div class="dropdown-divider"></div>
           <a
             (click)="logout()"
-            *ngIf="serv.islogin"
+            *ngIf="serv.token()"
             class="dropdown-item"
             href="/login"
             >logout <i class="fa fa-right-from-bracket"></i>

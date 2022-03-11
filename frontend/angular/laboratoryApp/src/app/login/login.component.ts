@@ -57,10 +57,7 @@ export class LoginComponent implements OnInit {
 
     this.authServices.login(this.loginForm.value).subscribe((val:any) => {
       this.msg = val;
-      this.errMsg = val;
-
-      console.log(this.msg);
-
+    
       if (this.msg.data.role === 'Admin') {
         this.toster.success(this.msg.data.fName.toUpperCase(), 'Welcome Back');
         this.router.navigate(['/dashbord']);

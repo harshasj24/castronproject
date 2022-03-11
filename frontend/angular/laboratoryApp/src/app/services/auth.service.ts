@@ -19,7 +19,7 @@ export class AuthService {
   data = [{ emai: 'harsha@com', pass: 123 }];
   formsData: any = [];
   private islogedin = new BehaviorSubject<boolean>(false);
-  islogin = this.islogedin.asObservable();
+  // islogin = this.islogedin.asObservable();
 
   role: any;
 
@@ -31,16 +31,14 @@ export class AuthService {
         if (!responce.error) {
           localStorage.setItem('token', responce.data.token);
           localStorage.setItem('role', responce.data.role);
-          this.islogedin.next(true);
+          // this.islogedin.next(true);
           this.role = responce.data.role;
         }
       })
     );
   }
 
-  getData() {
-    return this.http.get('http://jsonplaceholder.typicode.com/users');
-  }
+
 
   newData() {
     return this.formsData;

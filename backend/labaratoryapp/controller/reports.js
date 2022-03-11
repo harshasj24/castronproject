@@ -2,16 +2,18 @@ const reports = require("../model/userreport");
 const usersData = require("../model/userdata");
 
 let addReport1 = async (req, res, next) => {
-  let { _id, date, fName, sampleId, haematology, glucometry, thyroid } =
+  let { _id, fName, sampleId, haematology, glucometry, thyroid } =
     req.body;
   try {
     const isPatient = await usersData.findOne({ _id }).lean();
     if (isPatient) {
       let { email } = isPatient;
 
+      newDate=new Date();
+
       await reports.insertMany([
         {
-          date,
+          date:newDate,
           fName: isPatient.fName,
           email: email,
           sampleId,

@@ -8,6 +8,8 @@
       id="exampleInputPassword1"
       formControlName="fName"
     />
+
+    <span *ngIf="fName?.invalid && fName?.touched" style="color:red;">Patient Name is Required</span>
   </div>
   <div class="form-group mt-3">
     <input
@@ -17,7 +19,11 @@
       aria-describedby="emailHelp"
       placeholder="Enter Email *"
       formControlName="email"
+      
+
     />
+    <span *ngIf="email?.invalid && email?.touched"  style="color:red;"> Email is Required</span>
+
   </div>
   <div class="form-group mt-4">
     <input
@@ -29,6 +35,8 @@
       formControlName="password"
     />
     <span (click)="togglePass()" class="eyeIcon"><i [class]="eyes"></i></span>
+    <span *ngIf="password?.invalid && password?.touched" style="color:red;"> password is Required</span>
+
   </div>
   <div class="form-group mt-4">
    <select formControlName="role"    class="form-control"  id="">
@@ -36,6 +44,8 @@
      <option value="Admin">Admin</option>
      <option value="user">user</option>
    </select>
+   <span *ngIf="role?.invalid && role?.touched" style="color:red;"> Role is Required</span>
+
   </div>
   <!-- <input
     type="text"

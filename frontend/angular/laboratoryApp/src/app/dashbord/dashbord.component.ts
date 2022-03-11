@@ -10,6 +10,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./dashbord.component.css'],
 })
 export class DashbordComponent implements OnInit {
+  date: any;
   constructor(private apiServices: ApiService) { }
 
   flag1: boolean = true
@@ -106,7 +107,7 @@ export class DashbordComponent implements OnInit {
 
   reportsData: any;
 
-  allReports: any;
+  allReports: any=[];
   allReportsCpy: any;
   names: any;
   flag: any = false;
@@ -115,7 +116,7 @@ export class DashbordComponent implements OnInit {
 
     if (this.names) {
       this.allReports = this.allReports.filter((val: any) => {
-        return val.fName.includes(this.names.toLowerCase());
+        return val.fName.toLowerCase().includes(this.names.toLowerCase()) || val.date.toLowerCase().includes(this.names.toLowerCase()) ;
       });
     } else {
       this.allReports = this.allReportsCpy;
@@ -179,12 +180,36 @@ export class DashbordComponent implements OnInit {
     this.getAllUserResports();
     this.apiServices.usersReport().subscribe((rep: any) => {
       this.isLoadders = false
-      this.allReports = rep.data;
+      // this.allReports = rep.data;
+      console.log(rep.data.length);
+      
+      let conform=window.confirm("do need more data")
+      if (rep.data.length>=5) {
+        console.log("data");
+       conform
+      }
+      if (conform) {
+       this.allReports=rep.data  
+      }else{
+        for(let i=0; i<5; i++){
+          this.allReports.push(rep.data[i])
+
+        }
+      
+      }
+
+    
       // this.allReports = this.allReports.data;
       this.allReportsCpy = [...this.allReports];
-      console.log(rep);
+      // console.log(rep);
     });
 
     console.log('onlu once', this.sample.value);
+    
+    
+    this.date=new Date()
+
   }
+
+
 }

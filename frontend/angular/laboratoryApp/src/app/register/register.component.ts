@@ -21,6 +21,23 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', Validators.required),
     role: new FormControl('', Validators.required),
   });
+
+  get fName(){
+    return this.regForm.get("fName")
+
+  }
+  get email(){
+    return this.regForm.get("email")
+
+  }
+  get password(){
+    return this.regForm.get("password")
+
+  }
+  get role(){
+    return this.regForm.get("role")
+
+  }
   passText: any = 'password';
   eyes: any = 'fa fa-eye-slash';
   togglePass() {
@@ -39,7 +56,7 @@ export class RegisterComponent implements OnInit {
       this.sataus = val;
 
       if (!this.sataus.error) {
-        this.toster.success('register addesucess fully');
+        this.toster.success('register sucessfull');
         // window.confirm('register addesucess fully');
         this.router.navigate(['/userdetails']);
       } else {

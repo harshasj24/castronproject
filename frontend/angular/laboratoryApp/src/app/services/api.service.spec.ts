@@ -1,47 +1,4 @@
-// import { TestBed } from '@angular/core/testing';
 
-// import { ApiService } from './api.service';
-
-// describe('ApiService', () => {
-//   let service: ApiService;
-
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({});
-//     service = TestBed.inject(ApiService);
-//   });
-
-//   it('should be created', () => {
-//     expect(service).toBeTruthy();
-//   });
-// });
-// Skip to content
-// Search or jump to…
-// Pull request
-// Issues
-// Marketplace
-// Explore
-
-// @harshasj24
-// harshasj24
-// /
-// castronproject
-// Public
-// Code
-// Issues
-// Pull requests
-// Actions
-// Projects
-// Wiki
-// Security
-// Insights
-// Settings
-// castronproject/frontend/angular/laboratoryApp/src/app/services/api.service.spec.ts /
-
-// khattapani46@gmail.com unit testing
-// Latest commit 5d8c86f 7 minutes ago
-//  History
-//  1 contributor
-// 133 lines (119 sloc)  3.22 KB
 
 import { TestBed } from '@angular/core/testing';
 import {
