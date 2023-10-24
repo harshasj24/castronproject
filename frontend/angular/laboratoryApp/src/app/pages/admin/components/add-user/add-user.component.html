@@ -1,0 +1,92 @@
+<section id="addPatient">
+  <mat-card>
+    <mat-card-header>
+      <h2>Add Patient</h2>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="mt-3">
+      <form
+        [formGroup]="addPatientFormGroup"
+        (ngSubmit)="submitAddPatient()"
+        action=""
+      >
+        <p>
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input
+              formControlName="fName"
+              id="testName"
+              matInput
+              placeholder=""
+            />
+            <mat-error>Field is Required</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input
+              formControlName="lName"
+              id="testName"
+              matInput
+              placeholder=""
+            />
+            <mat-error>Field is Required</mat-error>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              formControlName="email"
+              id="testName"
+              type="email"
+              matInput
+              placeholder=""
+            />
+            <mat-error *ngIf="addPatientFormConrol?.email?.hasError('required')"
+              >Field is Required</mat-error
+            >
+            <mat-error>Field is Required</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input
+              formControlName="phone"
+              id="testName"
+              matInput
+              placeholder=""
+            />
+            <mat-error>Field is Required</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="date-picker w-100">
+            <mat-label>Inherited calendar color</mat-label>
+            <div class="d-flex">
+              <input formControlName="dob" matInput [matDatepicker]="dob" />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="dob"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dob color="primary"></mat-datepicker>
+            </div>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-error>Field is Required</mat-error>
+          </mat-form-field>
+        </p>
+
+        <mat-divider></mat-divider>
+        <div class="action mt-4">
+          <button type="submit" mat-raised-button color="primary">
+            Add Patient
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

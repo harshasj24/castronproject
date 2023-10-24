@@ -16,6 +16,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 import { LoadersComponent } from './loaders/loaders.component';
+import { MaterialModule } from './material';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -36,13 +39,19 @@ import { LoadersComponent } from './loaders/loaders.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    SharedModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       progressBar: true,
     }),
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,useClass:AuthorizationInterceptor,multi:true}
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

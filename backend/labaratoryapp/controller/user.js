@@ -73,7 +73,7 @@ let login = async (req, res, next) => {
 
 let allUserDetails = async (req, res, next) => {
   try {
-    let allData = await usersData.find({ role: "user" }).lean();
+    let allData = await usersData.find().lean();
     res.json({
       error: false,
       message: "Data fetched sucessfully",
@@ -87,7 +87,7 @@ let allUserDetails = async (req, res, next) => {
 let getOneUser = async (req, res, next) => {
   let email = req.params.email;
   try {
-    const oneUser = await usersData.findOne({ email }).lean();
+    const oneUser = await usersData.findOne({ email: email }).lean();
     res.json({
       error: false,
       message: "Data find successfully",
@@ -153,5 +153,4 @@ module.exports = {
 
   getOneUser,
   updateUser,
- 
 };

@@ -1,0 +1,105 @@
+<section id="createTestForm">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> create New Test </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="mt-3">
+      <form
+        [formGroup]="createTestForm"
+        action=""
+        (ngSubmit)="handleFormSubmit()"
+      >
+        <div class="fields__container">
+          <p>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Test Name</mat-label>
+              <input
+                formControlName="testName"
+                id="testName"
+                matInput
+                placeholder=""
+              />
+              <mat-error>Field is Required</mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Test Price</mat-label>
+              <input formControlName="testPrice" matInput placeholder="" />
+              <mat-error>Field is Required</mat-error>
+            </mat-form-field>
+          </p>
+        </div>
+        <div formArrayName="testOutComes">
+          <fieldset>
+            <legend>Test Outcomes</legend>
+            <div
+              *ngFor="let control of testOutComes['controls']; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="outcome">
+                <p>
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Outcome Test Name</mat-label>
+                    <input
+                      formControlName="outcomeTestName"
+                      matInput
+                      placeholder="Placeholder"
+                    />
+                    <mat-error>Field is Required</mat-error>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Outcome Test Value</mat-label>
+                    <input
+                      formControlName="outcomeTestValue"
+                      matInput
+                      placeholder="Placeholder"
+                    />
+                    <mat-error>Field is Required</mat-error>
+                  </mat-form-field>
+                </p>
+                <p class="action">
+                  <button
+                    type="button"
+                    mat-icon-button
+                    color="primary"
+                    aria-label=""
+                    (click)="addNewOutCome(i)"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </p>
+                <p class="action" *ngIf="testOutComes['controls'].length > 1">
+                  <button
+                    type="button"
+                    mat-icon-button
+                    color="warn"
+                    aria-label=""
+                    (click)="removeOutCome(i)"
+                  >
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </p>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="actions" class="d-flex justify-content-end">
+          <mat-divider></mat-divider>
+          <p> <button type="reset" class="mt-3 mx-3" mat-raised-button >
+            Reset
+          </button></p>
+          <p >
+            <button type="submit" class="mt-3" mat-raised-button color="primary">
+              Create Test
+            </button>
+          </p>
+        </div>
+      
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

@@ -51,7 +51,6 @@ describe('ApiService', () => {
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
-
     req.flush(user);
   });
 

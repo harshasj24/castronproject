@@ -13,7 +13,12 @@ import { AuthgardGuard } from './guard/authgard.guard';
 import { UserGuard } from './guard/user.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'landingpage', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./pages/admin/admin.module').then((m) => m.AdminModule),
+  },
   { path: 'landingpage', component: LandingpageComponent },
   {
     path: 'dashbord',
@@ -31,13 +36,17 @@ const routes: Routes = [
     component: EntersamplesComponent,
     canActivate: [AuthgardGuard],
   },
-  
+
   {
     path: 'userdetails',
     component: UserdetailsComponent,
     canActivate: [AuthgardGuard],
   },
-  { path: 'yoursample/:email', component: UserdashbordComponent,canActivate:[UserGuard] },
+  {
+    path: 'yoursample/:email',
+    component: UserdashbordComponent,
+    canActivate: [UserGuard],
+  },
 ];
 
 @NgModule({

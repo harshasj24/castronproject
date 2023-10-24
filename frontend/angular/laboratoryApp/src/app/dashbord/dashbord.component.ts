@@ -11,10 +11,10 @@ import { ApiService } from '../services/api.service';
 })
 export class DashbordComponent implements OnInit {
   date: any;
-  constructor(private apiServices: ApiService) { }
+  constructor(private apiServices: ApiService) {}
 
-  flag1: boolean = true
-  isLoadders: boolean = true
+  flag1: boolean = true;
+  isLoadders: boolean = true;
 
   getAllReports() {
     this.apiServices.allreports().subscribe((val) => {
@@ -29,7 +29,7 @@ export class DashbordComponent implements OnInit {
     });
   }
 
-  sample = new FormGroup({
+  sample: any = new FormGroup({
     patientName: new FormControl('', [Validators.required]),
     hemoglobin: new FormControl(''),
     glucometry: new FormControl(''),
@@ -84,7 +84,7 @@ export class DashbordComponent implements OnInit {
   glucoData() {
     this.apiServices
       .editReport({ _id: this.uId, glucometry: this.glucoForm.value })
-      .subscribe((val) => { });
+      .subscribe((val) => {});
   }
 
   hemoData() {
@@ -103,11 +103,11 @@ export class DashbordComponent implements OnInit {
         console.log(val);
       });
   }
-  sampleFormData() { }
+  sampleFormData() {}
 
   reportsData: any;
 
-  allReports: any=[];
+  allReports: any = [];
   allReportsCpy: any;
   names: any;
   flag: any = false;
@@ -116,7 +116,10 @@ export class DashbordComponent implements OnInit {
 
     if (this.names) {
       this.allReports = this.allReports.filter((val: any) => {
-        return val.fName.toLowerCase().includes(this.names.toLowerCase()) || val.date.toLowerCase().includes(this.names.toLowerCase()) ;
+        return (
+          val.fName.toLowerCase().includes(this.names.toLowerCase()) ||
+          val.date.toLowerCase().includes(this.names.toLowerCase())
+        );
       });
     } else {
       this.allReports = this.allReportsCpy;
@@ -132,7 +135,7 @@ export class DashbordComponent implements OnInit {
   glucometryReport: any = [];
   thyroidReport: any = [];
 
-  hemo() { }
+  hemo() {}
 
   userReport: any = '';
 
@@ -146,7 +149,6 @@ export class DashbordComponent implements OnInit {
   }
   arr: any;
   viewReportglu(_id: any) {
-
     console.log('thy', this.glucometry);
 
     for (const i of this.arr.data) {
@@ -175,41 +177,20 @@ export class DashbordComponent implements OnInit {
       console.log('cond');
       e.returnValue = confirmationMessage;
       return confirmationMessage;
-
     });
     this.getAllUserResports();
     this.apiServices.usersReport().subscribe((rep: any) => {
-      this.isLoadders = false
+      this.isLoadders = false;
       // this.allReports = rep.data;
       console.log(rep.data.length);
-      
-      let conform=window.confirm("do need more data")
-      if (rep.data.length>=5) {
-        console.log("data");
-       conform
-      }
-      if (conform) {
-       this.allReports=rep.data  
-      }else{
-        for(let i=0; i<5; i++){
-          this.allReports.push(rep.data[i])
-
-        }
-      
-      }
-
-    
+      this.allReports = rep.data;
       // this.allReports = this.allReports.data;
       this.allReportsCpy = [...this.allReports];
       // console.log(rep);
     });
 
     console.log('onlu once', this.sample.value);
-    
-    
-    this.date=new Date()
 
+    this.date = new Date();
   }
-
-
 }

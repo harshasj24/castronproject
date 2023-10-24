@@ -1,4 +1,4 @@
-<div class="container-fluid ">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-12 col-lg-7 text-center">
       <img
@@ -9,13 +9,12 @@
       />
     </div>
 
-    <div class="col-lg-5 col-md-12 ">
+    <div class="col-lg-5 col-md-12">
       <h1>Login</h1>
       <form [formGroup]="loginForm" (ngSubmit)="send()" class="">
-       
         <div class="alert alert-danger" *ngIf="errMsg.error" role="alert">
-          <i class="fa fa-exclamation-triangle  mr-2"  aria-hidden="true"></i>
-        {{ errMsg.message | titlecase }}
+          <i class="fa fa-exclamation-triangle mr-2" aria-hidden="true"></i>
+          {{ errMsg.message | titlecase }}
         </div>
         <div class="form-group mt-3">
           <input
@@ -43,7 +42,7 @@
           <span><i class="fa fa-lock"></i></span>
 
           <span *ngIf="password?.valid" (click)="togglePass()" class="eyeIcon"
-            ><i  [class]="eyes"></i
+            ><i [class]="eyes"></i
           ></span>
         </div>
 
@@ -59,14 +58,16 @@
       <p class="mt-5">
         Connect us with
         <span>
-          <a class="ml-3 fb" target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i> </a
+          <a class="ml-3 fb" target="blank" href="https://www.facebook.com/"
+            ><i class="fa fa-facebook"></i> </a
         ></span>
 
-        <a class="ml-3 tw"  target="blank"  href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
-        <a class="ml-3 gle"  target="blank"  href="https://google.com"> <i class="fa fa-google"> </i></a>
-   
-
-    
+        <a class="ml-3 tw" target="blank" href="https://twitter.com/"
+          ><i class="fa fa-twitter"></i
+        ></a>
+        <a class="ml-3 gle" target="blank" href="https://google.com">
+          <i class="fa fa-google"> </i
+        ></a>
       </p>
     </div>
   </div>

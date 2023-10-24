@@ -1,0 +1,13 @@
+<div class="modal__container">
+  <div class="modal__body">
+    <div *ngIf="modalData.type === 'success'" class="success_modal"></div>
+    <img width="110px" [src]="successIcon" alt="" srcset="" />
+    <p><strong>Success!</strong></p>
+    <p>{{ modalData.message }}</p>
+  </div>
+  <div class="modal__actions d-flex justify-content-end">
+    <button mat-raised-button (click)="closeModal()" color="primary">
+     {{ modalData.buttonTitle}}
+    </button>
+  </div>
+</div>

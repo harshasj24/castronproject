@@ -1,0 +1,43 @@
+<section id="adminSection">
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" [opened]="true">
+      <ul>
+        <li>
+          <a routerLink="/admin/dashboard" routerLinkActive="link-active">
+            <div class="icon">
+              <mat-icon>apps</mat-icon>
+            </div>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <mat-expansion-panel
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img
+                  width="25px"
+                  [src]="'lab.JPG' | imgLocation"
+                  alt=""
+                  srcset=""
+                />
+                <span class="ml-3">Laboratory</span></mat-panel-title
+              >
+            </mat-expansion-panel-header>
+            <ul class="w-100">
+              <li><a routerLink="/admin/lab/staff" class="ml-3" href="">Staff</a></li>
+              <li><a routerLink="/admin/lab/patient" class="ml-3" href="">Patients</a></li>
+              <li><a routerLink="/admin/lab/tests" class="ml-3" href="">Tests</a></li>
+            </ul>
+          </mat-expansion-panel>
+        </li>
+      </ul>
+    </mat-sidenav>
+    <mat-sidenav-content
+      ><div class="conatiner__body">
+        <router-outlet></router-outlet></div
+    ></mat-sidenav-content>
+  </mat-sidenav-container>
+</section>

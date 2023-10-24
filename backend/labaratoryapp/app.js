@@ -3,9 +3,10 @@ const app = express();
 const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
 const cors = require("cors");
-
+const patientRouter = require("./routes/patient");
 const reportRouter = require("./routes/report");
-
+const reportsRouter = require("./routes/GenericReportsRoutes");
+const adminRouter=require('./routes/admin');
 const dbUrl =
   "mongodb+srv://Harsha_sj:harsha@cluster0.3ba50.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -30,5 +31,8 @@ app.get("/error", (req, res) => {
 app.use("/labs", userRouter);
 
 app.use("/reports", reportRouter);
+app.use("/patient", patientRouter);
+app.use("/report", reportsRouter);
+app.use("/admin",adminRouter)
 
 module.exports = app;

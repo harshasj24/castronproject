@@ -11,6 +11,7 @@ import * as Rx from 'rxjs';
 import { ApiService } from '../services/api.service';
 import { response } from '../services/response';
 import { DashbordComponent } from './dashbord.component';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 describe('DashbordComponent', () => {
   let component: DashbordComponent;
@@ -53,7 +54,10 @@ describe('DashbordComponent', () => {
     tick(1000);
     expect(component.reportsData).toEqual(response);
   }));
-
+  it('patient name', () => {
+    spyOn(component, 'sample').and.callThrough();
+    expect(component.patientName).toBeTruthy();
+  });
   it('it should select object by id', () => {
     component.arr = [];
     component.arr.data = response;

@@ -6,10 +6,10 @@ const app = require("../app.js");
 describe("POST /users/signup", () => {
   test("OK, Registration is succefull", async () => {
     const res = await request(app).post("/labs/signup").send({
-      fName: "MSDhoni",
+      fName: "MS",
+      lName: "Dhoni",
       email: "MSDhoni0@gmail.com",
       password: "MSDhoni",
-      role: "user",
     });
     console.log(res);
     expect(res.statusCode).toEqual(200);
@@ -62,8 +62,6 @@ describe("GET /users/edit-users", () => {
     expect(res.statusCode).toEqual(200);
   });
 });
-
-
 
 describe("GET /samples/samples", () => {
   test("OK, sampleDetails getting done", async () => {
